@@ -18,4 +18,147 @@ body {
   color: var(--foreground);
   background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
+  overflow: hidden;
+}
+/* styles/markdown.css */
+
+/* 基本样式 */
+body {
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+  color: #333;
+}
+
+/* 标题 */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin-top: 1.5em;
+  margin-bottom: 0.5em;
+  font-weight: bold;
+}
+
+h1 {
+  font-size: 2.5em;
+  color: #2c3e50;
+}
+
+h2 {
+  font-size: 2em;
+  color: #34495e;
+}
+
+h3 {
+  font-size: 1.75em;
+  color: #7f8c8d;
+}
+
+h4 {
+  font-size: 1.5em;
+  color: #95a5a6;
+}
+
+h5 {
+  font-size: 1.25em;
+  color: #bdc3c7;
+}
+
+h6 {
+  font-size: 1em;
+  color: #e74c3c;
+}
+
+/* 段落 */
+p {
+  margin: 0.5em 0;
+}
+
+/* 列表 */
+ul,
+ol {
+  margin: 0.5em 0 1em 20px;
+}
+
+li {
+  margin: 0.25em 0;
+}
+
+/* 引用 */
+blockquote {
+  margin: 1em 0;
+  padding: 0.5em 1em;
+  border-left: 4px solid #3498db;
+  background-color: #f9f9f9;
+  color: #555;
+}
+
+/* 代码块 */
+pre {
+  background-color: #f0f0f0;
+  padding: 10px;
+  border-radius: 5px;
+  overflow: auto;
+}
+
+code {
+  background-color: #f0f0f0;
+  padding: 2px 4px;
+  border-radius: 4px;
+}
+
+/* 链接 */
+a {
+  /* color: #3498db; */
+  text-decoration: none;
+}
+
+a:hover {
+  /* text-decoration: underline; */
+  color: #3498db;
+}
+
+/* 图片 */
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* 表格 */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1em 0;
+}
+
+th,
+td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+th {
+  background-color: #f2f2f2;
+}
+
+/* 分隔线 */
+hr {
+  border: 0;
+  border-top: 1px solid #ddd;
+  margin: 1.5em 0;
+}
+::-webkit-scrollbar {
+  width: 8px;
+  max-height: 50px;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 4px;
+  background-color: #b5bcc7;
+}
+.active {
+  color: #3498db;
 }
