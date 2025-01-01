@@ -22,8 +22,8 @@ async function page({ params }: { params: Promise<{ id: string }> }) {
     if (!content) {
         return (
             <div>
-                <h1>内容未找到</h1>
-                <Tiptap />
+                <h1>{id}</h1>
+                <Tiptap id={id} />
             </div>
         );
     }
