@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-
+import { AntdRegistry } from '@ant-design/nextjs-registry';
+import { ConfigProvider } from 'antd';
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -27,7 +28,27 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased w-full h-full`}
       >
-        {children}
+        <ConfigProvider theme={{
+          components: {
+            Menu: {
+              // itemSelectedBg: '#00b96b',
+              // itemBg: '#00b96b',
+              itemSelectedColor: 'rgba(0, 0, 0, 0.88)',
+              itemColor: 'rgba(0, 0, 0, 0.88)',
+              itemPaddingInline: 5
+            }
+          },
+          token: {
+            // Seed Token，影响范围大
+            colorPrimary: '#00b96b',
+            borderRadius: 2,
+
+            // 派生变量，影响范围小
+            colorBgContainer: '#f6ffed',
+          },
+        }}>
+          <AntdRegistry>{children}</AntdRegistry>
+        </ConfigProvider>
       </body>
     </html>
   );

@@ -12,7 +12,7 @@ function Header() {
                 <Link className=' text-white' href="/db/blog">博客</Link>
                 <Link className=' text-white' href="/db/newblog">新博客</Link>
                 <Link className=' text-white' href="/db/login">Api</Link>
-                <Link className=' text-white' href="/db/page">页面</Link>
+                <Link className=' text-white' href="/db/project">项目经历</Link>
             </div>
         </div>
     );
