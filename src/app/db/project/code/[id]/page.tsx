@@ -1,5 +1,5 @@
 import React from 'react';
-const article_type = 'network'
+const article_type = 'code'
 import RenderPage from '@/app/components/RenderPage';
 
 async function page({ params }: { params: Promise<{ id: string }> }) {

@@ -16,7 +16,7 @@ export interface Article {
     content: string;
     // 文章更新历史，以JSON格式存储，这里在TypeScript中可以使用any类型来表示，
     // 实际应用中如果能确定具体结构可定义更精确的类型，比如数组类型等
-    update_history: Date;
+    update_history: [];
     // 文章的浏览量，数字类型，用于记录文章被查看的次数
     views_count: number;
     // 文章的点赞量，数字类型，统计文章获得点赞的数量
@@ -38,4 +38,5 @@ export interface Article {
     delete_status: 'not_deleted' | 'deleted';
     // 新增的技术类型字段，用于区分不同技术相关的文章，如'js'、'vue'、'react'、'java'等，字符串类型，最大长度设为50
     type: string;
+    title: string;
 }

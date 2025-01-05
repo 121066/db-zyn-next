@@ -40,3 +40,17 @@ export const getArticle = async (params) => {
     const result = await response.json()
     return result
 }
+/***
+ * 更新文章put
+ */
+export const updateArticle = async (params) => {
+    const response = await fetch(`${basePath}/articles/${params.id}`, {
+        method: 'put',
+        body: JSON.stringify(params),
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+    const result = await response.json()
+    return result
+}

@@ -1,12 +1,13 @@
-// 'use client'
+'use client'
 import React from 'react';
 import Link from 'next/link';
 import type { MenuProps } from 'antd';
 import { Menu } from 'antd';
 import { ConfigMenu } from './config'
 import { Tooltip } from 'antd';
+import { usePathname } from 'next/navigation';
 export default function Side() {
-
+    const pathname = usePathname()
     const items: MenuProps['items'] = ConfigMenu.map((item) => ({
         label: item.name,
         key: item.name,
@@ -22,8 +23,9 @@ export default function Side() {
             <Menu
 
                 // style={{ width: 256 }}
-                defaultSelectedKeys={['1']}
-                defaultOpenKeys={['sub1']}
+                // defaultSelectedKeys={['/yn/db/project/css/unit']}
+                // defaultOpenKeys={['/yn/db/project/css/unit']}
+                selectedKeys={[pathname]}
                 mode="inline"
                 items={items}
             />

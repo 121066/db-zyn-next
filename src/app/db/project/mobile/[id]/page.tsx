@@ -1,20 +1,11 @@
 import React from 'react';
-import fs from 'fs';
-import path from 'path';
-import matter from 'gray-matter';
-import { marked } from 'marked';
+const article_type = 'mobile'
+import RenderPage from '@/app/components/RenderPage';
 
 async function page({ params }: { params: Promise<{ id: string }> }) {
-    const { id } = await params
-    const content = fs.readFileSync(path.join(process.cwd(), `src/app/db/project/mobile/${id}.md`), 'utf8');
-    const matterResult = matter(content);
-    const processedContent = marked(matterResult.content);
-    return (
-        <div dangerouslySetInnerHTML={{ __html: processedContent }}>
-
-        </div>
-    );
-
+    const { id } = await params;
+    // 尝试读取文件内容
+    return <RenderPage id={id} article_type={article_type} ></RenderPage>
 }
 
 export default page;
