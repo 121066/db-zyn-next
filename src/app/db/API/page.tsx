@@ -1,5 +1,7 @@
 import React from "react";
 
 export default function Login() {
-    return <div>Login1</div>;
+    return <div>
+        欢迎来到小楠博客
+    </div>;
 }
