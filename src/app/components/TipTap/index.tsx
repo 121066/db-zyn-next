@@ -150,7 +150,9 @@ const Tiptap = (props: TiptapProps) => {
                 <div className=' space-x-5'>
                     {articleValue?.created_at && <span className=' ml-3  text-ft-secondary text-bs'>创建时间：{articleValue?.created_at && dayjs(articleValue?.created_at).format('YYYY-MM-DD HH:mm:ss')}</span>}
                     {historyList.length > 0 && <Select placeholder="历史版本" onChange={(e, item) => {
-                        handleSetData(item)
+                        //   const {content}=item
+                        // handleSetData(item)
+                        console.log(item)
                     }} style={{ width: '200px' }} options={historyList} >
 
                     </Select>}
@@ -185,6 +187,14 @@ const Tiptap = (props: TiptapProps) => {
                             let saveType = ''
                             // 更新文章
                             if (articleValue?.id) {
+                                // console.log({
+                                //     ...articleValue,
+                                //     content: editor.getHTML(),
+                                //     // uuid: handleFingerprint(),
+                                //     type: id,
+                                //     article_type,
+                                //     ...codeParams
+                                // })
                                 const { success, data } = await updateArticle({
                                     ...articleValue,
                                     content: editor.getHTML(),
@@ -193,6 +203,7 @@ const Tiptap = (props: TiptapProps) => {
                                     article_type,
                                     ...codeParams
                                 })
+
                                 saveType = 'update'
                                 successFlag = success
                             } else {
