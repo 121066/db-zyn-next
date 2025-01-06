@@ -13,7 +13,7 @@ export default function Side() {
         key: item.name,
         children: item.children.map((child) => ({
             label: <Tooltip title={child.name}>
-                <Link href={`${child.path}`}>{child.name}</Link>
+                <Link href={`${child.path}?title=${child.name}`}>{child.name}</Link>
             </Tooltip>,
             key: child.path,
         })),
