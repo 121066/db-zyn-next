@@ -116,7 +116,7 @@ const Tiptap = (props: TiptapProps) => {
                         label: (<span>{dayjs(item.updated_at).format('YYYY-MM-DD HH:mm:ss')}</span>),
                         value: item.id || index
                     }
-                })
+                }) as []
             })
         }
     }
@@ -130,6 +130,7 @@ const Tiptap = (props: TiptapProps) => {
         console.log(e, '编辑器', editor.getHTML())
         console.log('打印')
     }
+
     return (
         <div className={prefix}>
             <div className={`${prefix}-title flex flex-row justify-start items-center mt-3 mb-3`}>
@@ -149,7 +150,7 @@ const Tiptap = (props: TiptapProps) => {
                 }} className='ml-3' icon={<EditOutlined></EditOutlined>} disabled={isEdit}>编辑文章</Button>
                 <div className=' space-x-5'>
                     {articleValue?.created_at && <span className=' ml-3  text-ft-secondary text-bs'>创建时间：{articleValue?.created_at && dayjs(articleValue?.created_at).format('YYYY-MM-DD HH:mm:ss')}</span>}
-                    {historyList.length > 0 && <Select placeholder="历史版本" onChange={(e, item) => {
+                    {historyList?.length > 0 && <Select placeholder="历史版本" onChange={(e, item) => {
                         //   const {content}=item
                         // handleSetData(item)
                         console.log(item)

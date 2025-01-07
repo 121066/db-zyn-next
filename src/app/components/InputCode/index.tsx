@@ -16,8 +16,10 @@ function InputCode(props: IProps) {
         }
       `)
     useEffect(() => {
-        if (codeParams.code_content) {
+        if (codeParams?.code_content) {
             setCode(codeParams.code_content)
+        } else {
+            setCode('')
         }
     }, [codeParams])
     const handleCodeChange = (newCode) => {

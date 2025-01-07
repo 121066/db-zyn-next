@@ -1,16 +1,18 @@
+// 'use client'
 import React from "react";
 import { checkFileExists } from "@/utils/file";
 import Tiptap from "../TipTap";
 import matter from 'gray-matter';
 import { marked } from 'marked';
-
+// import { useSearchParams } from "next/navigation";
 interface IProps {
     id: string
     article_type: string
 }
 function RenderPage(props: IProps) {
     const { id, article_type } = props
-
+    // const searchParams = useSearchParams()
+    // console.log(searchParams.get('title'))
     let content;
     // const filePath = path.join(process.cwd(), `src/app/db/project/css/${id}/position.md`);
 

@@ -7,12 +7,14 @@ export const ConfigMenu = [
                 id: 'block',
                 path: '/db/project/html/block',
                 type: 'md',
+                useType: 'block'
             },
             {
                 name: '【dd】dl，dt，dd的区别​',
                 id: 'html_dd',
                 path: '/db/project/html/dd',
-                type: 'md'
+                type: 'md',
+                useType: 'block'
             }
         ]
     },
@@ -23,13 +25,15 @@ export const ConfigMenu = [
                 name: '【position】position有哪些属性',
                 path: '/db/project/css/position',
                 type: 'md',
-                id: 'css_position'
+                id: 'css_position',
+                useType: 'position'
             },
             {
                 name: '【sticky】Position: sticky 含义和使用场景',
                 path: '/db/project/css/sticky',
                 type: 'md',
-                id: 'css_sticky'
+                id: 'css_sticky',
+
             },
             {
                 name: '【0.5px】如何绘制一条0.5px高度的直线',
