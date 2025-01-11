@@ -29,7 +29,7 @@ function RenderPage(props: IProps) {
     if (!content) {
         return (
             <div>
-                <h1>{id}</h1>
+                {/* <h1>{id}</h1> */}
                 <Tiptap id={id} article_type={article_type} />
             </div>
         );

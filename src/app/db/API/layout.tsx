@@ -14,7 +14,7 @@ export default function ContentLayout({
                     <Link href={'/db/API/article'}>文章接口</Link>
                     <Link href={'/db/API/login'}>登录接口</Link>
                     <Link href={'/db/API/file'}>文件接口</Link>
-                    <Link href={'/db/API/log'}>日志接口</Link>
+                    <Link href={'/db/API/error_log'}>日志接口</Link>
                     <Link href={'/db/API/article_type'}>文章类型接口</Link>
                 </div>
                 <div style={{ height: 'calc(100vh - 60px)' }} className='flex-1 rounded-md h-full bg-white ml-2 p-2 overflow-y-auto'>{children}</div>

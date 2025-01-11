@@ -12,7 +12,7 @@ async function page({ params }: { params: Promise<{ id: string }> }) {
     //     </div>
     // );
     return (
-        <div>{id}</div>
+        <div></div>
     )
 }
 

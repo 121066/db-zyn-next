@@ -1,6 +1,6 @@
 'use client'
 import { useEffect, useState } from 'react'
-import { useEditor, EditorContent } from '@tiptap/react'
+import { useEditor, EditorContent, ReactNodeViewRenderer } from '@tiptap/react'
 import StarterKit from '@tiptap/starter-kit'
 import Document from '@tiptap/extension-document'
 import Paragraph from '@tiptap/extension-paragraph'
@@ -8,7 +8,7 @@ import Text from '@tiptap/extension-text'
 import BoldButton from '../QuickTool'
 import Highlight from '@tiptap/extension-highlight'
 import TextAlign from '@tiptap/extension-text-align'
-import { Button, message, Input, Select } from 'antd' // antd组件
+import { Button, message, Input, Select, Tag } from 'antd' // antd组件
 import { EditOutlined, RedoOutlined, EnterOutlined } from '@ant-design/icons'
 import { getFingerprint } from '@/utils/fingerprint' // 获取浏览器指纹
 import { addArticle, getArticle, updateArticle } from '@/api/article' // 文章接口
@@ -16,14 +16,23 @@ import Table from '@tiptap/extension-table'// 表格
 import TableCell from '@tiptap/extension-table-cell'
 import TableHeader from '@tiptap/extension-table-header'
 import TableRow from '@tiptap/extension-table-row'
+import CodeBlockLowlight from '@tiptap/extension-code-block-lowlight'
+import { createLowlight } from 'lowlight'
+import css from 'highlight.js/lib/languages/css'
+import js from 'highlight.js/lib/languages/javascript'
+import ts from 'highlight.js/lib/languages/typescript'
+import html from 'highlight.js/lib/languages/xml'
+import CodeBlockComponent from '../CodeBlockComponent'
 import DefaultView from '../DefaultView' // 默认视图
-import '@ant-design/v5-patch-for-react-19'; // antd5.x 兼容
+import '@ant-design/v5-patch-for-react-19'; // antd5.x 兼容'
 import dayjs from 'dayjs'
 let fingerprint = ''
 import './index.css'
 import { Article } from '@/types/article' // 文章类型
 import InputCode from '../InputCode'
 const prefix = 'yn-tiptap'
+const lowlight = createLowlight('')
+
 interface TiptapProps {
     id: string,
     article_type: string
@@ -33,6 +42,10 @@ let codeParams = {
     css_content: '',
     html_content: '',
 }
+lowlight.register('html', html)
+lowlight.register('css', css)
+lowlight.register('js', js)
+lowlight.register('ts', ts)
 // import Highlight from '@tiptap/extension-highlight'
 const Tiptap = (props: TiptapProps) => {
     const [articleValue, setArticleValue] = useState<Article>() // 文章字段
@@ -77,6 +90,13 @@ const Tiptap = (props: TiptapProps) => {
             TableRow,
             TableHeader,
             CustomTableCell,
+            CodeBlockLowlight
+                .extend({
+                    addNodeView() {
+                        return ReactNodeViewRenderer(CodeBlockComponent)
+                    },
+                })
+                .configure({ lowlight }),
         ],
         content: '',
     })
@@ -133,9 +153,10 @@ const Tiptap = (props: TiptapProps) => {
 
     return (
         <div className={prefix}>
-            <div className={`${prefix}-title flex flex-row justify-start items-center mt-3 mb-3`}>
+            <div className={`${prefix}-title flex flex-col justify-start  mt-3 mb-3`}>
+                {/* 标题区域 */}
                 {isEdit && <>
-                    <div className='  w-20'>标题</div>   <Input value={articleValue?.title} onChange={(e) => {
+                    <div className='w-20 flex flex-row'></div>   <Input value={articleValue?.title} onChange={(e) => {
                         setArticleValue((pre) => {
                             return {
                                 ...pre,
@@ -144,19 +165,27 @@ const Tiptap = (props: TiptapProps) => {
                         })
                     }} style={{ width: '400px' }}></Input>
                 </>}
-                {!isEdit && <div className='ml-6 font-bold   text-lg text-center'>{articleValue?.title}</div>}
-                <Button type='primary' onClick={() => {
-                    setIsEdit(true)
-                }} className='ml-3' icon={<EditOutlined></EditOutlined>} disabled={isEdit}>编辑文章</Button>
-                <div className=' space-x-5'>
-                    {articleValue?.created_at && <span className=' ml-3  text-ft-secondary text-bs'>创建时间：{articleValue?.created_at && dayjs(articleValue?.created_at).format('YYYY-MM-DD HH:mm:ss')}</span>}
-                    {historyList?.length > 0 && <Select placeholder="历史版本" onChange={(e, item) => {
-                        //   const {content}=item
-                        // handleSetData(item)
-                        console.log(item)
-                    }} style={{ width: '200px' }} options={historyList} >
+                {!isEdit && <div className='ml-6 font-bold   text-lg text-left'>{articleValue?.title}</div>}
+                {/* 文章信息区域 */}
+                <div className=' mt-3 flex flex-row justify-start items-center '>
+                    <Button type='primary' onClick={() => {
+                        setIsEdit(true)
+                    }} className='ml-3' icon={<EditOutlined></EditOutlined>} disabled={isEdit}></Button>
+                    <div className=' space-x-5'>
+                        {/* 创建人 */}
+                        <span className=' ml-3  text-ft-secondary text-bs'>创建人：{articleValue?.creator_name || '-'}</span>
+                        {/* 创建时间 */}
+                        {articleValue?.created_at && <span className=' ml-3  text-ft-secondary text-bs'>创建时间：{articleValue?.created_at && dayjs(articleValue?.created_at).format('YYYY-MM-DD HH:mm:ss')}</span>}
+                        {/* 文章类型 */}
+                        <span className=' ml-3  text-ft-secondary text-bs'>文章类型：<Tag color="blue">{articleValue?.article_type || '-'}</Tag></span>
+                        {/* 历史版本 */}
+                        {historyList?.length > 0 && <Select placeholder="历史版本" onChange={(e, item) => {
 
-                    </Select>}
+                            console.log(item)
+                        }} style={{ width: '200px' }} options={historyList} >
+
+                        </Select>}
+                    </div>
                 </div>
             </div>
             {isEdit && <BoldButton editor={editor}></BoldButton>}
@@ -188,14 +217,6 @@ const Tiptap = (props: TiptapProps) => {
                             let saveType = ''
                             // 更新文章
                             if (articleValue?.id) {
-                                // console.log({
-                                //     ...articleValue,
-                                //     content: editor.getHTML(),
-                                //     // uuid: handleFingerprint(),
-                                //     type: id,
-                                //     article_type,
-                                //     ...codeParams
-                                // })
                                 const { success, data } = await updateArticle({
                                     ...articleValue,
                                     content: editor.getHTML(),
@@ -210,6 +231,7 @@ const Tiptap = (props: TiptapProps) => {
                             } else {
                                 // 新增文章
                                 const { success, data } = await addArticle({
+                                    ...articleValue,
                                     content: editor.getHTML(),
                                     uuid: fingerprint || handleFingerprint(),
                                     type: id,

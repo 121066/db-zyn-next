@@ -19,7 +19,7 @@ function InputCode(props: IProps) {
         if (codeParams?.code_content) {
             setCode(codeParams.code_content)
         } else {
-            setCode('')
+            setCode('function Greeting() { return <h1>Hello, World!</h1>; }')
         }
     }, [codeParams])
     const handleCodeChange = (newCode) => {

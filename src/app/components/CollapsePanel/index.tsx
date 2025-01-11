@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { DownOutlined, RightOutlined } from '@ant-design/icons';
 import './index.css'
 const prefix = 'collapse-panel'
 const CollapsePanel = ({ title, children }: { title: string, children: React.ReactNode }) => {
@@ -10,7 +11,7 @@ const CollapsePanel = ({ title, children }: { title: string, children: React.Rea
         <div className={prefix}>
             <div onClick={togglePanel} className={`${prefix}-title`} style={{ cursor: 'pointer', padding: '10px', }}>
                 <span>{title}</span>
-                <span className={`${prefix}-icon ${isOpen ? '' : 'open'}`}></span>
+                <span >{isOpen ? <DownOutlined /> : < RightOutlined />}</span>
             </div>
             {isOpen && (
                 <div className={`${prefix}-content`} style={{ padding: '10px', border: '1px solid #ccc', marginTop: '5px' }}>

@@ -4,6 +4,7 @@ import Link from 'next/link';
 import CollapsePanel from '@/app/components/CollapsePanel';
 import { sidebar } from './config';
 import { usePathname } from 'next/navigation';
+const prefix = 'db-blog'
 export default function ContentLayout({
     children,
 }: Readonly<{
@@ -12,7 +13,7 @@ export default function ContentLayout({
     const pathname = usePathname()
     console.log(pathname)
     return (
-        <div className=' relative flex flex-col w-full h-full bg-slate-200'>
+        <div className=' db-blog relative flex flex-col w-full h-full bg-slate-200'>
             <div className='flex flex-row w-full h-full p-3'>
                 <div style={{ width: '280px' }} className='w-280 h-full bg-white p-2 space-y-3 flex flex-col overflow-y-auto'>
                     {sidebar.map((item, index) => (
@@ -20,7 +21,7 @@ export default function ContentLayout({
                             <div>
                                 {item.children.map((child, childIndex) => (
                                     <div className=' space-y-3' key={childIndex}>
-                                        <Link className={`${pathname === child[0] ? 'active' : ''}`} href={`/db/blog/${child[0]}`}>{child[1]}</Link>
+                                        <Link className={`${pathname.includes(child[0]) ? 'active' : ''}`} href={`/db/blog/${child[0]}`}>{child[1]}</Link>
                                     </div>
                                 ))}
                             </div>

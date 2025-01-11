@@ -29,7 +29,9 @@ body {
   color: #333;
 }
 
-/* 标题 */
+.db-blog {
+
+  /* 标题 */
 h1,
 h2,
 h3,
@@ -150,6 +152,12 @@ hr {
   border-top: 1px solid #ddd;
   margin: 1.5em 0;
 }
+
+.active {
+  color: #3498db;
+}
+
+}
 ::-webkit-scrollbar {
   width: 8px;
   max-height: 50px;
@@ -158,7 +166,4 @@ hr {
 ::-webkit-scrollbar-thumb {
   border-radius: 4px;
   background-color: #b5bcc7;
-}
-.active {
-  color: #3498db;
 }

@@ -10,7 +10,7 @@ function page() {
 
     return (
         <div className={`${prefix}`}>
-            <div>你的博客</div>
+            <div>你好,欢迎来到小楠博客</div>
         </div>
     );
 }
