@@ -27,6 +27,7 @@
     "@tiptap/starter-kit": "^2.11.0",
     "@types/lowlight": "^0.0.7",
     "antd": "^5.22.7",
+    "axios": "^1.7.9",
     "crypto-js": "^4.2.0",
     "dayjs": "^1.11.13",
     "draft-js": "^0.11.7",

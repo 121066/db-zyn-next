@@ -35,9 +35,9 @@ export const tableHTML = `
   </table>
 `
 
-const BoldButton = ({ editor }) => {
+const BoldButton = ({ editor, isTable = true }) => {
     if (!editor) return null
-    const buttons = [
+    const buttons = isTable ? [
         {
             label: <Space onClick={() => editor.chain().focus().insertContent(tableHTML, {
                 parseOptions: {
@@ -50,125 +50,125 @@ const BoldButton = ({ editor }) => {
             disabled: !editor.can().insertContent(tableHTML)
         },
         {
-            label: <Space onClick={() => editor.chain().focus().addColumnBefore().run()} disabled={!editor.can().addColumnBefore()}>
+            label: <Button type="text" onClick={() => editor.chain().focus().addColumnBefore().run()} disabled={!editor.can().addColumnBefore()}>
                 在前面添加列
-            </Space>,
+            </Button>,
             key: 'addColumnBefore',
             disabled: !editor.can().addColumnBefore()
         },
         {
-            label: <Space onClick={() => editor.chain().focus().addColumnAfter().run()} disabled={!editor.can().addColumnAfter()}>
+            label: <Button type="text" onClick={() => editor.chain().focus().addColumnAfter().run()} disabled={!editor.can().addColumnAfter()}>
                 在后面添加列
-            </Space>,
+            </Button>,
             key: 'addColumnAfter',
             disabled: !editor.can().addColumnAfter()
         },
         {
-            label: <Space onClick={() => editor.chain().focus().deleteColumn().run()} disabled={!editor.can().deleteColumn()}>
+            label: <Button type="text" onClick={() => editor.chain().focus().deleteColumn().run()} disabled={!editor.can().deleteColumn()}>
                 删除列
-            </Space>,
+            </Button>,
             key: 'deleteColumn',
             disabled: !editor.can().deleteColumn()
         },
         {
-            label: <Space onClick={() => editor.chain().focus().addRowBefore().run()} disabled={!editor.can().addRowBefore()}>
+            label: <Button type="text" onClick={() => editor.chain().focus().addRowBefore().run()} disabled={!editor.can().addRowBefore()}>
                 在前面添加行
-            </Space>,
+            </Button>,
             key: 'addRowBefore',
             disabled: !editor.can().addRowBefore()
         },
         {
-            label: <Space onClick={() => editor.chain().focus().addRowAfter().run()} disabled={!editor.can().addRowAfter()}>
+            label: <Button type="text" onClick={() => editor.chain().focus().addRowAfter().run()} disabled={!editor.can().addRowAfter()}>
                 在后面添加行
-            </Space>,
+            </Button>,
             key: 'addRowAfter',
             disabled: !editor.can().addRowAfter()
         },
         {
-            label: <Space onClick={() => editor.chain().focus().deleteRow().run()} disabled={!editor.can().deleteRow()}>
+            label: <Button type="text" onClick={() => editor.chain().focus().deleteRow().run()} disabled={!editor.can().deleteRow()}>
                 删除行
-            </Space>,
+            </Button>,
             key: 'deleteRow',
             disabled: !editor.can().deleteRow()
         },
         {
-            label: <Space onClick={() => editor.chain().focus().deleteTable().run()} disabled={!editor.can().deleteTable()}>
+            label: <Button type="text" onClick={() => editor.chain().focus().deleteTable().run()} disabled={!editor.can().deleteTable()}>
                 删除表格
-            </Space>,
+            </Button>,
             key: 'deleteTable',
             disabled: !editor.can().deleteTable()
         },
         {
-            label: <Space onClick={() => editor.chain().focus().mergeCells().run()} disabled={!editor.can().mergeCells()}>
+            label: <Button type="text" onClick={() => editor.chain().focus().mergeCells().run()} disabled={!editor.can().mergeCells()}>
                 合并单元格
-            </Space>,
+            </Button>,
             key: 'mergeCells',
             disabled: !editor.can().mergeCells()
         },
         {
-            label: <Space onClick={() => editor.chain().focus().splitCell().run()} disabled={!editor.can().splitCell()}>
+            label: <Button type="text" onClick={() => editor.chain().focus().splitCell().run()} disabled={!editor.can().splitCell()}>
                 拆分单元格
-            </Space>,
+            </Button>,
             key: 'splitCell',
             disabled: !editor.can().splitCell()
         },
         {
-            label: <Space onClick={() => editor.chain().focus().toggleHeaderColumn().run()} disabled={!editor.can().toggleHeaderColumn()}>
+            label: <Button type="text" onClick={() => editor.chain().focus().toggleHeaderColumn().run()} disabled={!editor.can().toggleHeaderColumn()}>
                 切换表头列
-            </Space>,
+            </Button>,
             key: 'toggleHeaderColumn',
             disabled: !editor.can().toggleHeaderColumn()
         },
         {
-            label: <Space onClick={() => editor.chain().focus().toggleHeaderRow().run()} disabled={!editor.can().toggleHeaderRow()}>
+            label: <Button type="text" onClick={() => editor.chain().focus().toggleHeaderRow().run()} disabled={!editor.can().toggleHeaderRow()}>
                 切换表头行
-            </Space>,
+            </Button>,
             key: 'toggleHeaderRow',
             disabled: !editor.can().toggleHeaderRow()
         },
         {
-            label: <Space onClick={() => editor.chain().focus().toggleHeaderCell().run()} disabled={!editor.can().toggleHeaderCell()}>
+            label: <Button type="text" onClick={() => editor.chain().focus().toggleHeaderCell().run()} disabled={!editor.can().toggleHeaderCell()}>
                 切换表头单元格
-            </Space>,
+            </Button>,
             key: 'toggleHeaderCell',
             disabled: !editor.can().toggleHeaderCell()
         },
         {
-            label: <Space onClick={() => editor.chain().focus().mergeOrSplit().run()} disabled={!editor.can().mergeOrSplit()}>
+            label: <Button type="text" onClick={() => editor.chain().focus().mergeOrSplit().run()} disabled={!editor.can().mergeOrSplit()}>
                 合并或拆分
-            </Space>,
+            </Button>,
             key: 'mergeOrSplit',
             disabled: !editor.can().mergeOrSplit()
         },
         {
-            label: <Space onClick={() => editor.chain().focus().setCellAttribute('backgroundColor', '#FAF594').run()} disabled={!editor.can().setCellAttribute('backgroundColor', '#FAF594')}>
+            label: <Button type="text" onClick={() => editor.chain().focus().setCellAttribute('backgroundColor', '#FAF594').run()} disabled={!editor.can().setCellAttribute('backgroundColor', '#FAF594')}>
                 设置单元格属性
-            </Space>,
+            </Button>,
             key: 'setCellAttribute',
             disabled: !editor.can().setCellAttribute('backgroundColor', '#FAF594')
         },
         {
-            label: <Space onClick={() => editor.chain().focus().fixTables().run()} disabled={!editor.can().fixTables()}>
+            label: <Button type="text" onClick={() => editor.chain().focus().fixTables().run()} disabled={!editor.can().fixTables()}>
                 修复表格
-            </Space>,
+            </Button>,
             key: 'fixTables',
             disabled: !editor.can().fixTables()
         },
         {
-            label: <Space onClick={() => editor.chain().focus().goToNextCell().run()} disabled={!editor.can().goToNextCell()}>
+            label: <Button type="text" onClick={() => editor.chain().focus().goToNextCell().run()} disabled={!editor.can().goToNextCell()}>
                 前往下一个单元格
-            </Space>,
+            </Button>,
             key: 'goToNextCell',
             disabled: !editor.can().goToNextCell()
         },
         {
-            label: <Space onClick={() => editor.chain().focus().goToPreviousCell().run()} disabled={!editor.can().goToPreviousCell()}>
+            label: <Button type="text" onClick={() => editor.chain().focus().goToPreviousCell().run()} disabled={!editor.can().goToPreviousCell()}>
                 前往上一个单元格
-            </Space>,
+            </Button>,
             key: 'goToPreviousCell',
             disabled: !editor.can().goToPreviousCell()
         }
-    ];
+    ] : [];
     return (
         <div className=' space-x-2 space-y-2'>
             <Dropdown menu={{
@@ -196,6 +196,7 @@ const BoldButton = ({ editor }) => {
                     <Button icon={<FontSizeOutlined />}></Button>
                 </Space>
             </Dropdown>
+            <Button onClick={() => editor.chain().focus().toggleHeading({ level: 1 }).run()}>H1</Button>
             <Button onClick={() => editor.chain().focus().setParagraph().run()} className={editor.isActive('paragraph') ? 'is-active' : ''}>
                 Paragraph
             </Button>
@@ -254,19 +255,21 @@ const BoldButton = ({ editor }) => {
             <Tooltip title="插入代码">
                 <Button icon={<CodeOutlined></CodeOutlined>} onClick={() => editor.chain().focus().toggleCodeBlock().run()} className={editor.isActive('codeBlock') ? 'is-active' : ''}></Button>
             </Tooltip>
-            <Button onClick={() => editor.chain().focus().setTextAlign('justify').run()} className={editor.isActive({ textAlign: 'justify' }) ? 'is-active' : ''}>
-                Justify
-            </Button>
-            <Tooltip title="插入表格">
-                <Button icon={<TableOutlined />} onClick={() => editor.chain().focus().insertTable({ rows: 3, cols: 3, withHeaderRow: true }).run()}>
-
+            {isTable && <>
+                <Button onClick={() => editor.chain().focus().setTextAlign('justify').run()} className={editor.isActive({ textAlign: 'justify' }) ? 'is-active' : ''}>
+                    Justify
                 </Button>
-            </Tooltip>
-            <Dropdown menu={{ items: buttons }}>
-                <Space>
-                    <Button icon={<TableOutlined />}></Button>
-                </Space>
-            </Dropdown>
+                <Tooltip title="插入表格">
+                    <Button icon={<TableOutlined />} onClick={() => editor.chain().focus().insertTable({ rows: 3, cols: 3, withHeaderRow: true }).run()}>
+
+                    </Button>
+                </Tooltip>
+                <Dropdown menu={{ items: buttons }}>
+                    <Space>
+                        <Button icon={<TableOutlined />}></Button>
+                    </Space>
+                </Dropdown>
+            </>}
 
         </div>
     );

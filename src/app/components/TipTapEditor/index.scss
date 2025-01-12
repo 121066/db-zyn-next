@@ -1,0 +1,18 @@
+.tip-tap-editor:focus{
+    border:none !important;
+    outline: none;
+    .tiptap{
+        outline: none;
+        border:none;
+    }
+    .tiptap:focus{
+        outline: none;
+        border:none;
+    }
+}
+.tip-tap-editor-editor{
+    outline: none;
+    >.tiptap{
+        outline: none !important;
+    }
+}
