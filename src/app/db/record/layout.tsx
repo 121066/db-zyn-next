@@ -11,11 +11,11 @@ export default function ContentLayout({
     }
     return (
         <div className=' relative flex flex-col w-full h-full'>
-            <div className=' p-2 flex flex-row h-full'>
+            <div className=' p-2 flex flex-row h-full overflow-y-auto'>
                 {/* 左侧菜单 */}
                 <Side></Side>
                 {/* 右侧主体内容区域 */}
-                <div className=' w-full h-full p-3'>
+                <div className=' w-full h-full p-3 overflow-y-auto'>
                     {children}
 
                 </div>

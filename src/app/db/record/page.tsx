@@ -6,12 +6,14 @@ import './index.scss'
 import Link from "next/link";
 const prefix = 'record-page-title'
 const page = () => {
+    const day = dayjs().format('YYYY-MM-DD')
+    const week = getChineseWeekDay(dayjs().locale('zh-cn').format('dddd'))
     return (
         <div className={prefix}>
             <div className={`${prefix}-title`}>
-                今天是: {dayjs().format('YYYY-MM-DD')}
+                今天是: {day}
                 &nbsp;
-                {getChineseWeekDay(dayjs().locale('zh-cn').format('dddd'))}
+                {week}
                 &nbsp;
                 <span>愿你每天都有好心情，开心每一天</span>
             </div>

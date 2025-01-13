@@ -4,14 +4,18 @@ import './index.scss'
 const prefix = 'side-record'
 import { getRecordList } from '@/api/records'
 import { LifeRecord } from '@/types/records'
-import { Tree, Button } from 'antd';
+import { Tree, Button, Tooltip } from 'antd';
 import type { TreeDataNode } from 'antd';
 import Link from 'next/link';
 import { SmileOutlined, MehOutlined, FrownFilled, FrownOutlined, DownOutlined } from '@ant-design/icons';
 import { useRouter } from 'next/navigation'
 import dayjs from 'dayjs'
+import onHandle from '@/utils/onHandle'
+import { dbThrottle } from '@/utils/throttle'
+// import { throttle } from 'lodash'
 const Side = () => {
     const router = useRouter()
+    // const listCurrent = useRef<LifeRecord[]>([])
     const [list, setList] = useState<LifeRecord[]>([])
     const treeData: TreeDataNode[] = [
         {
@@ -36,21 +40,27 @@ const Side = () => {
         const { data, success } = await getRecordList({ pageSize: 50, pageNum: 1 })
         if (success) {
             setList(data?.list || [])
+
         }
 
     }
     useEffect(() => {
         queryRecordList()
     }, [])
+    onHandle.on('update', dbThrottle(queryRecordList, 1000))
 
     return (
         <div className={prefix}>
             {
                 list?.map((item, index) => {
                     return (
-                        <Button key={index} type="text" onClick={() => {
-                            router.push(`/db/record/${item?.id}`)
-                        }} >{item.title} {dayjs(item.created_at).format('YYYY-MM-DD HH:mm:ss')}</Button>
+                        <div className=' overflow-hidden overflow-clip text-ellipsis' key={index}>
+                            <Tooltip title={item.title}>
+                                <Button type="text" onClick={() => {
+                                    router.push(`/db/record/${item?.id}`)
+                                }} >{item.title} {dayjs(item.created_at).format('MM-DD HH:mm:ss')}</Button>
+                            </Tooltip>
+                        </div>
                     )
                 })
             }

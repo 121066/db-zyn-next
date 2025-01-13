@@ -7,9 +7,7 @@ interface Props {
 const RecordsRenderPage = ({ id }: Props) => {
 
     return (
-        <div>
-            <TipTapEditor id={id}></TipTapEditor>
-        </div>
+        <TipTapEditor id={id}></TipTapEditor>
     )
 }
 export default RecordsRenderPage

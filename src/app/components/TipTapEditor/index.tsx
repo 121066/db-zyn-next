@@ -15,6 +15,7 @@ import '@ant-design/v5-patch-for-react-19'; // antd5.x 兼容'
 import { LifeRecord } from '@/types/records';
 import { getFingerprint } from '@/utils/fingerprint';
 import { useRouter } from 'next/navigation'
+import onHandle from '@/utils/onHandle'
 interface Props {
     id: string
 }
@@ -55,18 +56,22 @@ export default function TipTapEditor({ id }: Props) {
     }, [id, editor]);
     // 保存生活记录
     const saveRecord = async () => {
+        // console.log('saveRecord', '点击了哦')
+
         const content = editor.getHTML()
         if (lifeRecordValue.id) {
             const { success } = await updateRecord({ ...lifeRecordValue, content: editor.getHTML() })
             if (success) {
                 message.success('修改成功')
                 router.push(`/db/record/${lifeRecordValue.id}`)
+                onHandle.emit('update')
             }
         } else {
             const { success, data } = await addRecord({ ...lifeRecordValue, content: editor.getHTML(), uuid: await getFingerprint() })
             if (success) {
                 message.success('保存成功')
                 router.push(`/db/record`)
+                onHandle.emit('update')
             }
         }
 
