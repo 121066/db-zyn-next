@@ -4,11 +4,12 @@ class UpdateSide {
         this.updateObj = {}
     }
     on(key, fn) {
-        if (this.updateObj[key]) {
-            this.updateObj[key].push(fn)
-        } else {
-            this.updateObj[key] = [fn]
-        }
+        // if (this.updateObj[key]) {
+        //     this.updateObj[key].push(fn)
+        // } else {
+        //     this.updateObj[key] = [fn]
+        // }
+        this.updateObj[key] = [fn]
     }
     emit(key) {
         const itemKey = this.updateObj[key]
@@ -18,4 +19,6 @@ class UpdateSide {
     }
 
 }
-export default new UpdateSide()
+const onHandle = new UpdateSide()
+
+export default onHandle
