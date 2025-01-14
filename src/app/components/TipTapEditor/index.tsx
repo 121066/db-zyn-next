@@ -22,8 +22,9 @@ interface Props {
 export default function TipTapEditor({ id }: Props) {
     const router = useRouter()
     const [lifeRecordValue, setLifeRecordValue] = useState<LifeRecord>({
-        title: '未命名标题',
-        content: ''
+        title: '',
+        content: '',
+        creator_name: '小楠'
     })
     const editor = useEditor({
         extensions: [
@@ -34,9 +35,9 @@ export default function TipTapEditor({ id }: Props) {
         ],
         content: `<p>
         <h2>${dayjs().format('YYYY-MM-DD')}今日记录</h2>
-         <h5>今天做了什么事情</h5>
-        <h5>今天开心的事情</h5>
-         <h5>今天不开心的事情</h5>
+         <h5>🤔今天做了什么事情</h5>
+        <h5>😊今天开心的事情</h5>
+         <h5>😒今天不开心的事情</h5>
         </p>`,
     })
     const queryRecordDetail = async () => {
@@ -54,6 +55,10 @@ export default function TipTapEditor({ id }: Props) {
             queryRecordDetail()
         }
     }, [id, editor]);
+    onHandle.on('save', () => {
+        // console.log('save')
+        saveRecord()
+    })
     // 保存生活记录
     const saveRecord = async () => {
         // console.log('saveRecord', '点击了哦')
@@ -89,8 +94,11 @@ export default function TipTapEditor({ id }: Props) {
             <BoldButton editor={editor} isTable={false}></BoldButton>
             <EditorContent className={`${prefix}-editor`} editor={editor}></EditorContent>
             {/* 操作区域 */}
-            <div>
+            <div className=' space-x-3'>
                 <Button type='primary' onClick={saveRecord}>{lifeRecordValue.id ? '修改' : '保存'}</Button>
+                <Button type='primary' onClick={() => {
+                    router.push('/db/record')
+                }}>返回</Button>
             </div>
         </div>
     )

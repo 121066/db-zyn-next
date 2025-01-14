@@ -9,12 +9,14 @@ import type { TreeDataNode } from 'antd';
 import Link from 'next/link';
 import { SmileOutlined, MehOutlined, FrownFilled, FrownOutlined, DownOutlined } from '@ant-design/icons';
 import { useRouter } from 'next/navigation'
+import { usePathname } from 'next/navigation'
 import dayjs from 'dayjs'
 import onHandle from '@/utils/onHandle'
 import { dbThrottle } from '@/utils/throttle'
 // import { throttle } from 'lodash'
 const Side = () => {
     const router = useRouter()
+    const pathname = usePathname()
     // const listCurrent = useRef<LifeRecord[]>([])
     const [list, setList] = useState<LifeRecord[]>([])
     const treeData: TreeDataNode[] = [
@@ -48,9 +50,15 @@ const Side = () => {
         queryRecordList()
     }, [])
     onHandle.on('update', dbThrottle(queryRecordList, 1000))
-
+    const isAdd = pathname === '/db/record/db-zyn'
     return (
         <div className={prefix}>
+            {!isAdd && <div>
+                <Button type="primary" onClick={() => {
+                    onHandle.emit('save')
+                    router.push('/db/record/db-zyn')
+                }}>新增记录</Button>
+            </div>}
             {
                 list?.map((item, index) => {
                     return (

@@ -236,19 +236,22 @@ const Tiptap = (props: TiptapProps) => {
                                     uuid: fingerprint || handleFingerprint(),
                                     type: id,
                                     article_type,
-                                    ...codeParams
+                                    ...codeParams,
+                                    creator_name: '小楠',
+                                    creator_id: '1'
                                 })
                                 saveType = 'add'
                                 if (success) {
                                     setArticleValue((pre) => {
                                         return {
                                             ...pre,
-                                            id: data.id
+                                            id: data.id,
+
                                         }
                                     })
                                 }
                                 successFlag = success
-
+                                getArticleItems()
                             }
                             const titleObj = {
                                 'update': '更新成功',

@@ -38,7 +38,10 @@ export default function RootLayout({
               // itemBg: '#00b96b',
               itemSelectedColor: 'rgba(0, 0, 0, 0.88)',
               itemColor: 'rgba(0, 0, 0, 0.88)',
-              itemPaddingInline: 5
+              itemPaddingInline: 16,
+              itemMarginInline: 4,
+              iconMarginInlineEnd: 4,
+
             }
           },
           token: {
