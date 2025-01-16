@@ -1,5 +1,8 @@
 import React, { useEffect } from "react";
 import { LiveProvider, LiveEditor, LiveError, LivePreview } from 'react-live';
+import { configLanguage } from "./config";
+import { Select } from 'antd'
+import ItemCode from "./itemCode";
 interface IProps {
     onChange: (params: string, type: string) => void;
     codeParams: {
@@ -15,6 +18,14 @@ function InputCode(props: IProps) {
           return <h1>Hello, World!</h1>;
         }
       `)
+    const [cssCode, setCssCode] = React.useState(`
+        div{
+        color:red;
+        }
+        #init{
+        color:red;
+        }
+        `)
     useEffect(() => {
         if (codeParams?.code_content) {
             setCode(codeParams.code_content)
@@ -31,20 +42,36 @@ function InputCode(props: IProps) {
     // console.log(code)
     return (
         <div className=" flex flex-col justify-between ">
-            <div>
+            <div className=" relative ">
+                <div className=" absolute right-1 top-1">
+                    <Select className="  " style={{ width: '240px', }} options={configLanguage}></Select>
+                </div>
                 <LiveProvider code={code} scope={{}} >
+
                     <LiveEditor onChange={handleCodeChange} />
                     <LiveError />
                     <LivePreview />
                 </LiveProvider>
+
             </div>
             <div>
-                {/* <LiveProvider code={code} scope={{}} >
-                    <LiveEditor onChange={handleCodeChange} />
+                <LiveProvider language="html" code={`<div id="init">
+                    123
+                </div>`} scope={{ cssCode }} >
+                    <LiveEditor />
                     <LiveError />
                     <LivePreview />
-                </LiveProvider> */}
+                </LiveProvider>
             </div>
+            <h1>css</h1>
+            <ItemCode code="<div></div>" ></ItemCode>
+            {/* <div className=" relative ">
+                <LiveProvider language="css" code={cssCode} scope={{}} >
+                    <LiveEditor onChange={setCssCode} />
+                    <LiveError />
+                    <LivePreview />
+                </LiveProvider>
+            </div> */}
         </div>
     );
 }

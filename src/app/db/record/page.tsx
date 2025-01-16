@@ -5,9 +5,10 @@ import { getChineseWeekDay } from "@/utils/tool";
 import './index.scss'
 import Link from "next/link";
 const prefix = 'record-page-title'
-const page = () => {
-    const day = dayjs().format('YYYY-MM-DD')
-    const week = getChineseWeekDay(dayjs().locale('zh-cn').format('dddd'))
+const day = dayjs().format('YYYY-MM-DD')
+const week = getChineseWeekDay(dayjs().locale('zh-cn').format('dddd'))
+const Page = () => {
+
     return (
         <div className={prefix}>
             <div className={`${prefix}-title`}>
@@ -24,4 +25,13 @@ const page = () => {
         </div>
     )
 }
-export default page
+export default Page
+// export async function getServerSideProps() {
+//     return {
+//         props: {
+//             day: dayjs().format("YYYY-MM-DD"),
+//             week: getChineseWeekDay(dayjs().locale("zh-cn").format("dddd")),
+//         },
+//         unstable_revalidate: 0,
+//     };
+// }

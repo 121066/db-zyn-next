@@ -67,7 +67,7 @@ export default function TipTapEditor({ id }: Props) {
         if (lifeRecordValue.id) {
             const { success } = await updateRecord({ ...lifeRecordValue, content: editor.getHTML() })
             if (success) {
-                message.success('修改成功')
+                message.open({ type: 'success', message: '修改成功' })
                 router.push(`/db/record/${lifeRecordValue.id}`)
                 onHandle.emit('update')
             }
