@@ -16,6 +16,8 @@ import { LifeRecord } from '@/types/records';
 import { getFingerprint } from '@/utils/fingerprint';
 import { useRouter } from 'next/navigation'
 import onHandle from '@/utils/onHandle'
+import { uploadImage } from '@/api';
+import Image from '@tiptap/extension-image'
 interface Props {
     id: string
 }
@@ -32,6 +34,7 @@ export default function TipTapEditor({ id }: Props) {
             Document,
             Paragraph,
             Text,
+            Image,
         ],
         content: `<p>
         <h2>${dayjs().format('YYYY-MM-DD')}今日记录</h2>
@@ -39,6 +42,19 @@ export default function TipTapEditor({ id }: Props) {
         <h5>😊今天开心的事情</h5>
          <h5>😒今天不开心的事情</h5>
         </p>`,
+        onPaste: async (event) => {
+            const items = event.clipboardData.items
+            for (let i = 0; i < items.length; i++) {
+                const item = items[i];
+                if (item && item.kind === 'file' && item.type.startsWith('image/')) {
+                    const file = item.getAsFile();
+                    const { data } = await uploadImage(file)
+                    if (data.urlPath) {
+                        editor.commands.setImage({ src: data.urlPath });
+                    }
+                }
+            }
+        }
     })
     const queryRecordDetail = async () => {
         const isFlag = isNaN(Number(id))

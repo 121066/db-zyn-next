@@ -11,10 +11,10 @@ class UpdateSide {
         // }
         this.updateObj[key] = [fn]
     }
-    emit(key) {
+    emit(key, data) {
         const itemKey = this.updateObj[key]
         if (itemKey) {
-            itemKey.forEach(fn => fn(this.val))
+            itemKey.forEach(fn => fn(data))
         }
     }
 

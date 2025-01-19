@@ -4,6 +4,7 @@ import { checkFileExists } from "@/utils/file";
 import Tiptap from "../TipTap";
 import matter from 'gray-matter';
 import { marked } from 'marked';
+// import onHandle from "@/utils/onHandle";
 // import { useSearchParams } from "next/navigation";
 interface IProps {
     id: string
@@ -15,7 +16,7 @@ function RenderPage(props: IProps) {
     // console.log(searchParams.get('title'))
     let content;
     // const filePath = path.join(process.cwd(), `src/app/db/project/css/${id}/position.md`);
-
+    let title
     try {
         // content = fs.readFileSync(filePath, 'utf8');
         content = checkFileExists(article_type, id)
@@ -29,7 +30,7 @@ function RenderPage(props: IProps) {
     if (!content) {
         return (
             <div>
-                {/* <h1>{id}</h1> */}
+                <h1>{title}</h1>
                 <Tiptap id={id} article_type={article_type} />
             </div>
         );

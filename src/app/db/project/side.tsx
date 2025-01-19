@@ -6,6 +6,7 @@ import { Menu } from 'antd';
 import { ConfigMenu } from './config'
 import { Tooltip } from 'antd';
 import { usePathname } from 'next/navigation';
+// import onHandle from '@/utils/onHandle';
 export default function Side() {
     const pathname = usePathname()
     const items: MenuProps['items'] = ConfigMenu.map((item) => ({
@@ -13,7 +14,10 @@ export default function Side() {
         key: item.name,
         children: item.children.map((child) => ({
             label: <Tooltip title={child.name}>
-                <Link href={`${child.path}?title=${child.name}`}>{child.name}</Link>
+                <Link onClick={() => {
+
+
+                }} href={`${child.path}?title=${child.name}`}>{child.name}</Link>
             </Tooltip>,
             key: child.path,
         })),
