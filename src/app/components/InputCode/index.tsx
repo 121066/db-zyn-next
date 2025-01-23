@@ -54,7 +54,7 @@ function InputCode(props: IProps) {
                 </LiveProvider>
 
             </div>
-            <div>
+            {/* <div>
                 <LiveProvider language="html" code={`<div id="init">
                     123
                 </div>`} scope={{ cssCode }} >
@@ -63,7 +63,7 @@ function InputCode(props: IProps) {
                     <LivePreview />
                 </LiveProvider>
             </div>
-            <h1>css</h1>
+            <h1>css</h1> */}
             <ItemCode code="<div></div>" ></ItemCode>
             {/* <div className=" relative ">
                 <LiveProvider language="css" code={cssCode} scope={{}} >

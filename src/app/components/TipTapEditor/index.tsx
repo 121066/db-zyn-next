@@ -18,6 +18,18 @@ import { useRouter } from 'next/navigation'
 import onHandle from '@/utils/onHandle'
 import { uploadImage } from '@/api';
 import Image from '@tiptap/extension-image'
+import CodeBlockComponent from '../CodeBlockComponent'
+import CodeBlockLowlight from '@tiptap/extension-code-block-lowlight'
+import { createLowlight } from 'lowlight'
+import css from 'highlight.js/lib/languages/css'
+import js from 'highlight.js/lib/languages/javascript'
+import ts from 'highlight.js/lib/languages/typescript'
+import html from 'highlight.js/lib/languages/xml'
+const lowlight = createLowlight('')
+lowlight.register('html', html)
+lowlight.register('css', css)
+lowlight.register('js', js)
+lowlight.register('ts', ts)
 interface Props {
     id: string
 }
@@ -35,6 +47,13 @@ export default function TipTapEditor({ id }: Props) {
             Paragraph,
             Text,
             Image,
+            CodeBlockLowlight
+                .extend({
+                    addNodeView() {
+                        return ReactNodeViewRenderer(CodeBlockComponent)
+                    },
+                })
+                .configure({ lowlight }),
         ],
         content: `<p>
         <h2>${dayjs().format('YYYY-MM-DD')}今日记录</h2>

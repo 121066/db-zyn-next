@@ -3,7 +3,7 @@ const basePath = 'https://dbyxs.top/api'
  * 获取记录列表
  */
 export const getRecordList = async (params) => {
-    const response = await fetch(`${basePath}/life_records/list`, {
+    const response = await fetch(`${basePath}/life_records/list?pageSize=999`, {
         method: 'get',
         // body: JSON.stringify(params)
         headers: {
