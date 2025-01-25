@@ -1,4 +1,5 @@
 'use client'
+// 生活记录组件
 import React from "react";
 import TipTapEditor from "@/app/components/TipTapEditor";
 interface Props {

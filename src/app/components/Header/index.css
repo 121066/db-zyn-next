@@ -1,7 +1,7 @@
 .header-top {
   height: 50px;
-  background-color: #000;
-  color: #fff;
+  /* background-color: #000; */
+  color: #1F2733;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -9,4 +9,5 @@
   padding: 0 20px;
   position: absolute;
   width: 100%;
+  box-shadow: 0 2px 2px #F5F7FA;
 }

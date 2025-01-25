@@ -1,10 +1,16 @@
-import React   from 'react'
-import RecordsRenderPage from '@/app/components/RecordsRenderPage';
-async function page({ params }: { params: Promise<{ id: string }> }) {
+// 'use client'
+import React from 'react'
+// import KnowledgeComponent from '@/app/components/KnowledgeComponent';
+import RenderPage from '../Component/RenderPage';
+import KnowledgeComponent from '@/app/components/KnowledgeComponent';
+async function Page({ params }: { params: Promise<{ id: string }> }) {
     const { id } = await params
-    return (
-        <RecordsRenderPage id={id}></RecordsRenderPage>
-    )
+    if (id !== 'newblog-zyn') {
+        return <RenderPage id={id} ></RenderPage>
+    } else {
+        return <KnowledgeComponent></KnowledgeComponent>
+    }
+
 }
 
-export default page;
+export default Page;

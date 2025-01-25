@@ -1,6 +1,7 @@
 import React from 'react';
 import Side from './side';
-
+const prefix = 'db-newblog'
+import './index.scss'
 export default function ContentLayout({
     children,
 }: Readonly<{
@@ -10,12 +11,12 @@ export default function ContentLayout({
         console.log('点击')
     }
     return (
-        <div className=' relative flex flex-col w-full h-full'>
+        <div className={`${prefix} relative flex flex-col w-full h-full`}>
             <div className=' p-2 flex flex-row h-full overflow-y-auto'>
                 {/* 左侧菜单 */}
                 <Side></Side>
                 {/* 右侧主体内容区域 */}
-                <div className=' w-full h-full p-3 overflow-y-auto'>
+                <div className=' bg-white rounded w-full h-full p-3 overflow-y-auto'>
                     {children}
 
                 </div>

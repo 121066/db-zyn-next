@@ -1,0 +1,8 @@
+.knowledge{
+    &-title:focus{
+        border:none;
+        outline: none;
+        border-color: transparent;
+        box-shadow: none;
+    }
+}

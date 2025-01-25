@@ -54,3 +54,33 @@ export const updateArticle = async (params) => {
     const result = await response.json()
     return result
 }
+/**
+ * 根据类型获取文章
+ **/
+export const getArticleByType = async (params) => {
+    const response = await fetch(`${basePath}/articles/list/type?type=${params.type}&pageSize=30`, {
+        method: 'get',
+        credentials: 'same-origin',
+        // body: JSON.stringify(params),
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+    const result = await response.json()
+    return result
+}
+/**
+ * 根据id获取单篇文章
+ */
+export const getArticleById = async (params) => {
+    const response = await fetch(`${basePath}/articles/item/${params.id}`, {
+        method: 'get',
+        credentials: 'same-origin',
+        // body: JSON.stringify(params),
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+    const result = await response.json()
+    return result
+}

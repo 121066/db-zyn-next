@@ -62,7 +62,7 @@ const Side = () => {
             {
                 list?.map((item, index) => {
                     return (
-                        <div className=' overflow-hidden overflow-clip text-ellipsis' key={index}>
+                        <div className=' overflow-hidden overflow-clip overflow-y-auto text-ellipsis' key={index}>
                             <Tooltip title={item.title}>
                                 <Button type="text" onClick={() => {
                                     router.push(`/db/record/${item?.id}`)

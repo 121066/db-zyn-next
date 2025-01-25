@@ -51,5 +51,15 @@ export default {
       },
     },
   },
-  plugins: [],
+  plugins: [function ({ addUtilities }) {
+    addUtilities({
+      '.line-clamp-3': {
+        'display': '-webkit-box',
+        '-webkit-box-orient': 'vertical',
+        '-webkit-line-clamp': '3',
+        'overflow': 'hidden',
+        'text-overflow': 'ellipsis'
+      }
+    });
+  }],
 } satisfies Config;

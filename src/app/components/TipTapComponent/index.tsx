@@ -8,10 +8,6 @@ import Text from '@tiptap/extension-text'
 import BoldButton from '../QuickTool'
 import Highlight from '@tiptap/extension-highlight'
 import TextAlign from '@tiptap/extension-text-align'
-import { Button, message, Input, Select, Tag } from 'antd' // antd组件
-import { EditOutlined, RedoOutlined, EnterOutlined } from '@ant-design/icons'
-import { getFingerprint } from '@/utils/fingerprint' // 获取浏览器指纹
-import { addArticle, getArticle, updateArticle } from '@/api/article' // 文章接口
 import Table from '@tiptap/extension-table'// 表格
 import TableCell from '@tiptap/extension-table-cell'
 import TableHeader from '@tiptap/extension-table-header'
@@ -24,11 +20,8 @@ import ts from 'highlight.js/lib/languages/typescript'
 import html from 'highlight.js/lib/languages/xml'
 import Image from '@tiptap/extension-image'
 import CodeBlockComponent from '../CodeBlockComponent'
-import DefaultView from '../DefaultView' // 默认视图
 import '@ant-design/v5-patch-for-react-19'; // antd5.x 兼容'
-import dayjs from 'dayjs'
-let fingerprint = ''
-// import './index.css'
+import './index.scss'
 import { Article } from '@/types/article' // 文章类型
 import InputCode from '../InputCode'
 const prefix = 'yn-tiptap'
@@ -36,9 +29,11 @@ const lowlight = createLowlight('')
 import { uploadImage } from '@/api'
 interface TiptapProps {
     id: string,
-    article_type: string
+    onChange?: (e: string) => void
+    content?: string
+    // article_type: string
 }
-let codeParams = {
+const codeParams = {
     code_content: '',
     css_content: '',
     html_content: '',
@@ -48,12 +43,12 @@ lowlight.register('css', css)
 lowlight.register('js', js)
 lowlight.register('ts', ts)
 // import Highlight from '@tiptap/extension-highlight'
-const Tiptap = (props: TiptapProps) => {
+const TipTapComponent = (props: TiptapProps) => {
     const [articleValue, setArticleValue] = useState<Article>() // 文章字段
     const [loading, setLoading] = useState<boolean>(false) // 保存按钮
     const [isEdit, setIsEdit] = useState<boolean>(false) // 编辑文章
     const [historyList, setHistoryList] = useState<Array<Record<string, string>>>([]) // 历史版本数据
-    const { id, article_type } = props
+    const { id, onChange, content } = props
     const CustomTableCell = TableCell.extend({
         addAttributes() {
             return {
@@ -97,7 +92,7 @@ const Tiptap = (props: TiptapProps) => {
                 })
                 .configure({ lowlight }),
         ],
-        content: '',
+        content: content,
         onPaste: async (event) => {
             const items = event.clipboardData.items
             for (let i = 0; i < items.length; i++) {
@@ -113,43 +108,33 @@ const Tiptap = (props: TiptapProps) => {
                 }
             }
             event.preventDefault();
-        }
-    })
-    // 获取浏览器指纹
-    const handleFingerprint = async () => {
-        const res = await getFingerprint()
-        fingerprint = res || ''
-        return res || ''
-    }
-    const handleSetData = (data) => {
-        editor.commands.setContent(data.content)
-        setArticleValue((pre) => {
-            return {
-                ...pre,
-                ...data
+        },
+        onUpdate: ({ editor }) => {
+            if (onChange) {
+                onChange(editor.getHTML())
             }
-        })
-        const { code_content, css_content, html_content } = data
-        codeParams = { code_content, css_content, html_content }
-    }
-   
-    const onChange = (e) => {
-        console.log(e, '编辑器', editor.getHTML())
-        console.log('打印')
-    }
 
+        },
+
+    })
+
+    useEffect(() => {
+        if (content && content) {
+            editor?.commands.setContent(content)
+        }
+    }, [content, editor])
     return (
         <div className={prefix}>
-          <BoldButton editor={editor}></BoldButton>
-          <EditorContent
-                className={`${prefix}-editor mt-3`}  onChange={onChange} editor={editor} />
-         
-         <InputCode codeParams={codeParams} onChange={(e, type) => {
+            <BoldButton editor={editor}></BoldButton>
+            <EditorContent
+                className={`${prefix}-editor mt-3`} editor={editor} />
+
+            {/* <InputCode codeParams={codeParams} onChange={(e, type) => {
                 codeParams[type] = e
-            }}></InputCode>
+            }}></InputCode> */}
         </div>
 
     )
 }
 
-export default Tiptap
+export default TipTapComponent

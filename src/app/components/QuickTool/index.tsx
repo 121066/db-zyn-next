@@ -170,7 +170,7 @@ const BoldButton = ({ editor, isTable = true }) => {
         }
     ] : [];
     return (
-        <div className=' space-x-2 space-y-2'>
+        <div className=' space-x-2 space-y-0'>
             <Dropdown menu={{
                 items: [{
                     label: <Space onClick={() => {
@@ -252,7 +252,7 @@ const BoldButton = ({ editor, isTable = true }) => {
                 >
                 </Button>
             </Tooltip>
-            <Tooltip title="插入代码">
+            <Tooltip title="插入代码（Enter2次退出代码编辑）">
                 <Button icon={<CodeOutlined></CodeOutlined>} onClick={() => editor.chain().focus().toggleCodeBlock().run()} className={editor.isActive('codeBlock') ? 'is-active' : ''}></Button>
             </Tooltip>
             {isTable && <>
