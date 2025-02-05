@@ -58,7 +58,7 @@ export const updateArticle = async (params) => {
  * 根据类型获取文章
  **/
 export const getArticleByType = async (params) => {
-    const response = await fetch(`${basePath}/articles/list/type?type=${params.type}&pageSize=30`, {
+    const response = await fetch(`${basePath}/articles/list/type?type=${params.type}&pageSize=30&pageNum=${params.pageNum}`, {
         method: 'get',
         credentials: 'same-origin',
         // body: JSON.stringify(params),

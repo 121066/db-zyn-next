@@ -3,6 +3,7 @@ import React from "react";
 import { Avatar, List, Space, Skeleton } from 'antd';
 import { LikeOutlined, MessageOutlined, StarOutlined, EyeOutlined } from '@ant-design/icons';
 import { Article } from "@/types/article";
+import Image from "next/image";
 interface IProps {
     list: Array<Article>
     onClick?: (item: Article) => void
@@ -29,7 +30,7 @@ function ItemList(props: IProps) {
                                 onClick(item)
                             }
                         }}
-                        className=" hover:bg-base rounded "
+                        className=" hover:bg-base rounded cursor-pointer"
                         style={{ padding: '12px' }}
                         actions={[
                             <IconText icon={StarOutlined} text={item.likes_count + ''} key="list-vertical-star-o" />,
@@ -37,6 +38,14 @@ function ItemList(props: IProps) {
                             <IconText icon={EyeOutlined} text={item.views_count + ''} key="list-vertical-like-o" />,
                             <IconText icon={MessageOutlined} text={item.comments_count + ''} key="list-vertical-message" />,
                         ]}
+                        extra={
+                            <Image
+                                width={168}
+                                height={168}
+                                alt="logo"
+                                src="https://dbyxs.top/file/a7228d1175b415bfe21e37a83234f025"
+                            />
+                        }
                     >
                         <List.Item.Meta
                             avatar={item.avatar ? (<Avatar src={item.avatar} />) : (<Avatar src={'https://dbyxs.top/file/4cc8d7e3e3b4e898f5daa4bc574878b3'} />)}

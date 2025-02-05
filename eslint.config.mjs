@@ -14,6 +14,7 @@ const eslintConfig = [
   {
     rules: {
       '@typescript-eslint/no-unused-vars': 'off', // 禁用未使用变量的检查
+      '@typescript-eslint/no-explicit-any': 'off',
     },
   }
 ];
