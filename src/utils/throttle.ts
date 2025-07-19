@@ -8,3 +8,13 @@ export const dbThrottle = (fn, dely) => {
         }
     }
 }
+// 防抖
+export const dbdebounce = (fn, delay) => {
+    let timer = null
+    return function (...args) {
+        if (timer) clearTimeout(timer)
+        timer = setTimeout(() => {
+            fn.apply(this, args)
+        }, delay)
+    }
+}

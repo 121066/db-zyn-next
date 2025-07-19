@@ -28,7 +28,7 @@ import DefaultView from '../DefaultView' // 默认视图
 import '@ant-design/v5-patch-for-react-19'; // antd5.x 兼容'
 import dayjs from 'dayjs'
 let fingerprint = ''
-import './index.css'
+import './index.scss'
 import { Article } from '@/types/article' // 文章类型
 import InputCode from '../InputCode'
 const prefix = 'yn-tiptap'

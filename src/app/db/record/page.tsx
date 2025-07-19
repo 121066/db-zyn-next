@@ -1,20 +1,30 @@
-import React from "react";
+'use client'
+import React, { useEffect, useState } from "react";
 import { Button } from "antd";
 import dayjs from "dayjs";
 import { getChineseWeekDay } from "@/utils/tool";
 import './index.scss'
 import Link from "next/link";
 const prefix = 'record-page-title'
-const day = dayjs().format('YYYY-MM-DD')
-const week = getChineseWeekDay(dayjs().locale('zh-cn').format('dddd'))
+// const day = dayjs().format('YYYY-MM-DD')
+// const week = getChineseWeekDay(dayjs().locale('zh-cn').format('dddd'))
 const Page = () => {
-
+    const [paramsTime, setParamsTime] = useState({
+        day: '',
+        week: ''
+    })
+    useEffect(() => {
+        setParamsTime({
+            day: dayjs().format('YYYY-MM-DD'),
+            week: getChineseWeekDay(dayjs().locale('zh-cn').format('dddd'))
+        })
+    }, [])
     return (
         <div className={prefix}>
             <div className={`${prefix}-title`}>
-                今天是: {day}
+                今天是: {paramsTime.day}
                 &nbsp;
-                {week}
+                {paramsTime.week}
                 &nbsp;
                 <span>愿你每天都有好心情，开心每一天</span>
             </div>
@@ -25,7 +35,7 @@ const Page = () => {
         </div>
     )
 }
-export default Page
+
 // export async function getServerSideProps() {
 //     return {
 //         props: {
@@ -35,3 +45,4 @@ export default Page
 //         unstable_revalidate: 0,
 //     };
 // }
+export default Page

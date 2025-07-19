@@ -1,5 +1,7 @@
-import React from 'react';
-import { Button, Tooltip, Dropdown, Space } from 'antd';
+import React, { useState } from 'react';
+import { Button, Tooltip, Dropdown, Space, Popover } from 'antd';
+import UploadImage from './UploadImage'; // 图片识别
+import AddLink from './AddLink';   // 插入链接
 import {
     BoldOutlined, ItalicOutlined, StrikethroughOutlined,
     HighlightOutlined, AlignLeftOutlined, AlignCenterOutlined, AlignRightOutlined,
@@ -7,7 +9,9 @@ import {
     TableOutlined,
     BarsOutlined,
     CodeOutlined,
-    DesktopOutlined
+    DesktopOutlined,
+    PictureOutlined,
+    DisconnectOutlined
 
 } from '@ant-design/icons';
 export const tableHTML = `
@@ -36,7 +40,9 @@ export const tableHTML = `
 `
 
 const BoldButton = ({ editor, isTable = true }) => {
+    const [modelVisible, setModelVisible] = useState<boolean>(false)
     if (!editor) return null
+
     const buttons = isTable ? [
         {
             label: <Space onClick={() => editor.chain().focus().insertContent(tableHTML, {
@@ -255,6 +261,30 @@ const BoldButton = ({ editor, isTable = true }) => {
             <Tooltip title="插入代码（Enter2次退出代码编辑）">
                 <Button icon={<CodeOutlined></CodeOutlined>} onClick={() => editor.chain().focus().toggleCodeBlock().run()} className={editor.isActive('codeBlock') ? 'is-active' : ''}></Button>
             </Tooltip>
+            <Tooltip title="识别图片文案">
+                <Button icon={<PictureOutlined></PictureOutlined>} onClick={() => {
+                    setModelVisible(true)
+                }}></Button>
+            </Tooltip>
+            <Tooltip title="识别图片代码">
+                <Button icon={<PictureOutlined></PictureOutlined>}></Button>
+            </Tooltip>
+            <Tooltip title="添加链接">
+                <AddLink onChange={(e) => {
+                    // editor.chain().focus().insertContent({
+                    //     type: 'link',
+                    //     attrs: {
+                    //         href: e.url,
+                    //         target: '_blank', // 可选：设置为在新标签页打开
+                    //     },
+                    // }).run();
+                    // editor.chain().focus().setLink({ href: e.url }).run();
+                    editor.chain().focus().extendMarkRange('link').setLink({ href: e.url })
+                        .run()
+                }}>
+                    <Button icon={<DisconnectOutlined></DisconnectOutlined>}></Button>
+                </AddLink>
+            </Tooltip>
             {isTable && <>
                 <Button onClick={() => editor.chain().focus().setTextAlign('justify').run()} className={editor.isActive({ textAlign: 'justify' }) ? 'is-active' : ''}>
                     Justify
@@ -270,7 +300,14 @@ const BoldButton = ({ editor, isTable = true }) => {
                     </Space>
                 </Dropdown>
             </>}
+            {modelVisible && <UploadImage onChange={(e) => {
+                const { text } = e.data
+                if (text) {
+                    editor.chain().focus().insertContent(text).run()
+                    setModelVisible(false)
+                }
 
+            }} title='图片上传' visible={modelVisible} onCancel={() => setModelVisible(false)}></UploadImage>}
         </div>
     );
 };

@@ -19,7 +19,7 @@ function ItemList(props: IProps) {
     const { list, onClick } = props
     return (
         <>
-            {list.length && <List
+            {list.length > 0 && <List
                 split
                 itemLayout="vertical"
                 dataSource={list}
@@ -40,10 +40,10 @@ function ItemList(props: IProps) {
                         ]}
                         extra={
                             <Image
-                                width={168}
-                                height={168}
+                                width={100}
+                                height={78}
                                 alt="logo"
-                                src="https://dbyxs.top/file/a7228d1175b415bfe21e37a83234f025"
+                                src={item?.cover_photo || 'https://dbyxs.top/file/4cc8d7e3e3b4e898f5daa4bc574878b3'}
                             />
                         }
                     >

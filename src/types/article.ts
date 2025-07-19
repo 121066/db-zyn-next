@@ -46,5 +46,5 @@ export interface Article {
     // 文章的点赞状态，使用枚举类型，有'not_liked'（未点赞）和'liked'（已点赞）两种可能的值
     like_status?: 'not_liked' | 'liked';
     // 文章的评论状态，使用枚举类型，有'not_commented'（未评论）和'commented'（已评论）两种可能的值
-    cover_photo?: Array<string> | string// 封面图片
+    cover_photo?: string// 封面图片
 }

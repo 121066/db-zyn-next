@@ -52,7 +52,7 @@ const Side = () => {
     onHandle.on('update', dbThrottle(queryRecordList, 1000))
     const isAdd = pathname === '/db/record/db-zyn'
     return (
-        <div className={prefix}>
+        <div className={`${prefix} overflow-y-auto overflow-hidden`}>
             {!isAdd && <div>
                 <Button type="primary" onClick={() => {
                     onHandle.emit('save')
@@ -62,7 +62,7 @@ const Side = () => {
             {
                 list?.map((item, index) => {
                     return (
-                        <div className='  overflow-y-auto text-ellipsis' key={index}>
+                        <div className='   text-ellipsis' key={index}>
                             <Tooltip title={item.title}>
                                 <Button type="text" onClick={() => {
                                     router.push(`/db/record/${item?.id}`)

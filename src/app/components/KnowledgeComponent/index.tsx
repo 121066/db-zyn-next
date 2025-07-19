@@ -78,7 +78,7 @@ function KnowledgeComponent({ id }: IProps) {
                 ...codeParams,
                 uuid: await getFingerprint(),
                 type: article?.article_type,
-                avatar: 'https://dbyxs.top/file/a7228d1175b415bfe21e37a83234f025',
+                // avatar: 'https://dbyxs.top/file/a7228d1175b415bfe21e37a83234f025',
                 creator_name: '小楠',
                 creator_id: 1
             })
