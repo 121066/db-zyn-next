@@ -105,7 +105,7 @@ function KnowledgeComponent({ id }: IProps) {
                         }
                     })
                 }} value={article?.title} className={`${prefix}-title`} style={{ fontSize: '22px', marginBottom: '12px', fontWeight: '600', height: '45px', border: 'none', width: '50%', background: 'transparent', boxShadow: 'none' }} placeholder="请输入标题"></Input>
-                <div className={`${prefix}-desc flex flex-row text-ft-placeholder`}>类型：<Select options={configOpt} onChange={(e) => {
+                <div className={`${prefix}-desc items-center min-w-[290px] flex flex-row text-ft-placeholder`}>类型：<Select options={configOpt} onChange={(e) => {
                     setArticle((pre) => {
                         return {
                             ...pre,
