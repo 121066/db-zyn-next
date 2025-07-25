@@ -22,7 +22,7 @@ export default {
         'success-light': '#B3F2C6', // 成功提示/浅
         info: '#237FFA', // 信息提示
         'info-light': '#BDE2FF', // 信息提示/浅
-
+        'custom-bg': '#f5f6f7',// 自定义背景色
         /** 基础色 */
         white: '#FFFFFF', // 白色
         placeholder: '#B5BCC7', // placeholder提示色
