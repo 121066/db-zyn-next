@@ -13,9 +13,9 @@ export default function ContentLayout({
     const pathname = usePathname()
     console.log(pathname)
     return (
-        <div className=' db-blog relative flex flex-col w-full h-full bg-slate-200'>
-            <div className='flex flex-row w-full h-full p-3'>
-                <div style={{ width: '280px' }} className='w-280 h-full bg-white p-2 space-y-3 flex flex-col overflow-y-auto'>
+        <div style={{ backgroundColor: '#f5f6f7' }} className=' db-blog relative flex flex-col w-full h-full bg-slate-200'>
+            <div className='flex flex-row w-full h-full p-2 gap-2'>
+                <div style={{ width: '240px', height: 'calc(100vh - 65px)' }} className='w-280 rounded h-full bg-white p-2 space-y-3 flex flex-col overflow-y-auto'>
                     {sidebar.map((item, index) => (
                         <CollapsePanel key={index} title={item.title}>
                             <div>
@@ -28,7 +28,7 @@ export default function ContentLayout({
                         </CollapsePanel>
                     ))}
                 </div>
-                <div style={{ height: 'calc(100vh - 75px)' }} className='flex-1 h-full bg-white ml-3 p-3 overflow-y-auto'>{children}</div>
+                <div style={{ height: 'calc(100vh - 65px)' }} className='flex-1 h-full bg-white rounded  p-2 overflow-y-auto'>{children}</div>
             </div>
 
         </div>
