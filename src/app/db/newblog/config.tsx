@@ -8,6 +8,10 @@ export const configOpt = [
     { value: 'css', label: <Tag color="red">Css</Tag>, text: 'Css' },
     { value: 'js', label: <Tag color="orange">JavaScript</Tag>, text: 'JavaScript' },
     { value: 'vue', label: <Tag color="green">Vue</Tag>, text: 'Vue' },
+    // 小程序
+    {value:'wxProgram',label:<Tag color="orange">小程序</Tag>,text:'小程序'},
+    {value:'reactNative',label:<Tag color="success">ReactNative</Tag>,text:'ReactNative'},
+    {value:'nextjs',label:<Tag color="default">NextJs</Tag>,text:'nextJs'},
     { value: 'nodejs', label: <Tag color="purple">Node</Tag>, text: 'Node' },
     { value: 'TypeScript', label: <Tag color="magenta">TypeScript</Tag>, text: 'TypeScript' },
     { value: 'Python', label: <Tag color="cyan">Python</Tag>, text: 'Python' },
