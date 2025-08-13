@@ -42,7 +42,7 @@ function RenderPage(props: IProps) {
         const { data, success } = await getArticleByType({ type: id, pageNum })
         // setLoading(false)
         if (success && data.list) {
-            console.log('///')
+            // console.log('///')
             setPage((pre) => {
                 return {
                     // ...pre,
@@ -96,7 +96,7 @@ function RenderPage(props: IProps) {
             }
         }
     }, [loading, hasMore]); // 依赖于 loading 和 hasMore
-    console.log(scrollRef.current?.scrollTop, '滚动距离')
+    // console.log(scrollRef.current?.scrollTop, '滚动距离')
     const fetch = dbdebounce(async (value: string, setData: any) => {
         const { data, success } = await getArticleByType({ type: id, title: value })
         if (success) {

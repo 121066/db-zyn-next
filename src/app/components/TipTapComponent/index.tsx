@@ -199,8 +199,12 @@ const TipTapComponent = (props: TiptapProps) => {
         }
     }, [content, editor])
     return (
-        <div className={prefix}>
-            <BoldButton editor={editor}></BoldButton>
+        <div className={`${prefix}`}>
+            {/* 添加吸顶效果 */}
+            <div className=' sticky top-12 bg-white z-10'>
+
+                <BoldButton editor={editor}></BoldButton>
+            </div>
             <EditorContent
                 className={`${prefix}-editor mt-3`} editor={editor} />
 

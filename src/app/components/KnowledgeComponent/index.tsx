@@ -96,7 +96,7 @@ function KnowledgeComponent({ id }: IProps) {
     return (
         <div className={`${prefix}`}>
             <Spin spinning={loading} fullscreen></Spin>
-            <div className="flex flex-row justify-start items-center">
+            <div className="flex flex-row justify-start items-center sticky top-0 bg-white z-10">
                 <Input onChange={(e) => {
                     setArticle((pre) => {
                         return {

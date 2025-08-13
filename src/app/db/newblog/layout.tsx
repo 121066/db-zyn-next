@@ -16,7 +16,7 @@ export default function ContentLayout({
                 {/* 左侧菜单 */}
                 <Side></Side>
                 {/* 右侧主体内容区域 */}
-                <div style={{ height: 'calc(100vh - 65px)' }} className=' bg-white rounded w-full h-full p-3 overflow-y-auto'>
+                <div style={{ height: 'calc(100vh - 66px)' }} className=' bg-white rounded w-full h-full px-3 overflow-y-auto'>
                     {children}
 
                 </div>
