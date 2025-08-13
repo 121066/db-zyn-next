@@ -6,7 +6,7 @@ import Link from "next/link";
 
 export default function NewBlog() {
 
-    return <div>
+    return <div className="p-4">
         <Link href={'/db/newblog/newblog-zyn'}>   <Button type="primary">添加知识片段</Button></Link>
 
     </div>;

@@ -120,7 +120,7 @@ function RenderPage(props: IProps) {
         router.push(`/db/newblog/${id}/${newValue}`)
     };
     return (
-        <div ref={scrollRef} className=" overflow-y-auto h-full pb-4 ">
+        <div ref={scrollRef} className=" overflow-y-auto h-full pt-4 pb-4 ">
             <Spin spinning={loading} fullscreen></Spin>
             <div className="pb-4 space-x-3 bg-white flex flex-row justify-start sticky top-0 z-50  items-start">
                 <Select
