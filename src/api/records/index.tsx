@@ -8,7 +8,8 @@ export const getRecordList = async (params) => {
         // body: JSON.stringify(params)
         headers: {
             'Content-Type': 'application/json'
-        }
+        },
+        credentials: 'include'  // 添加这一行来携带cookies
     })
     const result = await response.json()
     return result
@@ -22,7 +23,8 @@ export const addRecord = async (params) => {
         body: JSON.stringify(params),
         headers: {
             'Content-Type': 'application/json'
-        }
+        },
+        credentials: 'include'  // 添加这一行来携带cookies
     })
     const result = await response.json()
     return result
@@ -40,7 +42,8 @@ export const getRecord = async (params) => {
         // body: JSON.stringify(params),
         headers: {
             'Content-Type': 'application/json'
-        }
+        },
+        credentials: 'include'  // 添加这一行来携带cookies
     })
     const result = await response.json()
     return result
@@ -54,7 +57,8 @@ export const updateRecord = async (params) => {
         body: JSON.stringify(params),
         headers: {
             'Content-Type': 'application/json'
-        }
+        },
+        credentials: 'include'  // 添加这一行来携带cookies
     })
     const result = await response.json()
     return result
