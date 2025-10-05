@@ -6,7 +6,7 @@ export const uploadImage = async (params) => {
     const formData = new FormData();
     formData.append('file', params);
     // formData.append('type', 'daily') 
-    const response = await fetch(`${basePath}/api/image-list`, {
+    const response = await fetch(`${basePath}/img`, {
         method: 'post',
         body: formData,
         // headers: {
