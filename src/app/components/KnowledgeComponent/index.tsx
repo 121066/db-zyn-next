@@ -55,7 +55,7 @@ function KnowledgeComponent({ id }: IProps) {
         }
         setLoading(true)
         if (id) {
-            const { success } = await updateArticleItems({
+            const { success, message } = await updateArticleItems({
                 ...article,
                 content: codeContent,
                 ...codeParams,
@@ -68,11 +68,11 @@ function KnowledgeComponent({ id }: IProps) {
                 router.back()
                 message.open({ type: 'success', content: '保存成功' })
             } else {
-                message.open({ type: 'error', content: '保存失败' })
+                message.open({ type: 'error', content: message || "保存失败" })
             }
             setLoading(false)
         } else {
-            const { success } = await addArticleItems({
+            const { success, message } = await addArticleItems({
                 ...article,
                 content: codeContent,
                 ...codeParams,
@@ -88,7 +88,7 @@ function KnowledgeComponent({ id }: IProps) {
                 router.back()
                 message.open({ type: 'success', content: '保存成功' })
             } else {
-                message.open({ type: 'error', content: '保存失败' })
+                message.open({ type: 'error', content: message || "保存失败" })
             }
             setLoading(false)
         }
