@@ -40,14 +40,14 @@ function InputCode(props: IProps) {
     }, [codeParams]);
 
     const handleCodeChange = (newCode: string) => {
-        onChange(newCode, 'code_content');
-        setCode(newCode);
+        // onChange(newCode, 'code_content');
+        // setCode(newCode);
     };
 
     const handleCssChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
         const newCss = event.target.value;
-        onChange(newCss, 'css_content');
-        setCssCode(newCss);
+        // onChange(newCss, 'css_content');
+        // setCssCode(newCss);
     };
 
     return (
@@ -76,4 +76,4 @@ function InputCode(props: IProps) {
     );
 }
 
-export default React.memo(InputCode);
+export default InputCode;

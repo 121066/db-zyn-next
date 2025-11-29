@@ -9,9 +9,9 @@ export const configOpt = [
     { value: 'js', label: <Tag color="orange">JavaScript</Tag>, text: 'JavaScript' },
     { value: 'vue', label: <Tag color="green">Vue</Tag>, text: 'Vue' },
     // 小程序
-    {value:'wxProgram',label:<Tag color="orange">小程序</Tag>,text:'小程序'},
-    {value:'reactNative',label:<Tag color="success">ReactNative</Tag>,text:'ReactNative'},
-    {value:'nextjs',label:<Tag color="default">NextJs</Tag>,text:'nextJs'},
+    { value: 'wxProgram', label: <Tag color="orange">小程序</Tag>, text: '小程序' },
+    { value: 'reactNative', label: <Tag color="success">ReactNative</Tag>, text: 'ReactNative' },
+    { value: 'nextjs', label: <Tag color="default">NextJs</Tag>, text: 'nextJs' },
     { value: 'nodejs', label: <Tag color="purple">Node</Tag>, text: 'Node' },
     { value: 'TypeScript', label: <Tag color="magenta">TypeScript</Tag>, text: 'TypeScript' },
     { value: 'Python', label: <Tag color="cyan">Python</Tag>, text: 'Python' },
@@ -23,4 +23,5 @@ export const configOpt = [
     { value: 'database', label: <Tag color="lime">数据库</Tag>, text: '数据库' },
     { value: 'network', label: <Tag color="lime">网络</Tag>, text: '网络' },
     { value: 'file', label: <Tag color="lime">文件</Tag>, text: '文件' },
+    { value: 'learning', label: <Tag color="lime">学习</Tag>, text: '学习' },
 ]

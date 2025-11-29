@@ -63,6 +63,29 @@ const TipTapComponent = (props: TiptapProps) => {
     //         console.log(e)
     //     }
     // }
+    // 初始化内容，顶部和底部各加一个空段落
+    const getInitContent = () => {
+        if (!content) {
+            return [
+                { type: 'paragraph' },
+                { type: 'paragraph' }
+            ];
+        }
+        // 如果 content 是 HTML 字符串，可以用 tiptap 的 fromHTML 转换
+        // 这里假设 content 已经是 tiptap 的 JSON 格式
+        let parsedContent;
+        try {
+            parsedContent = typeof content === 'string' ? JSON.parse(content) : content;
+        } catch {
+            parsedContent = content;
+        }
+        // 顶部和底部插入空段落
+        return [
+            { type: 'paragraph' },
+            ...(Array.isArray(parsedContent) ? parsedContent : [parsedContent]),
+            { type: 'paragraph' }
+        ];
+    };
     const CustomTableCell = TableCell.extend({
         addAttributes() {
             return {

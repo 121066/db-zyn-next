@@ -269,7 +269,13 @@ const BoldButton = ({ editor, isTable = true }) => {
                 </Button>
             </Tooltip>
             <Tooltip title="插入代码（Enter2次退出代码编辑）">
-                <Button icon={<CodeOutlined></CodeOutlined>} onClick={() => editor.chain().focus().toggleCodeBlock().run()} className={editor.isActive('codeBlock') ? 'is-active' : ''}></Button>
+                <Button icon={<CodeOutlined></CodeOutlined>} onClick={() =>
+                    //  editor.chain().focus().toggleCodeBlock().run()
+                    editor.chain().focus()
+                        .insertContent([{ type: 'paragraph' }, { type: 'codeBlock' }, { type: 'paragraph' }])
+                        .run()
+
+                } className={editor.isActive('codeBlock') ? 'is-active' : ''}></Button>
             </Tooltip>
             <Tooltip title="识别图片文案">
                 <Button icon={<PictureOutlined></PictureOutlined>} onClick={() => {

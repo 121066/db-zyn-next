@@ -93,6 +93,12 @@ function KnowledgeComponent({ id }: IProps) {
             setLoading(false)
         }
     }
+    const handleCodeParamsChange = React.useCallback((value: string, type: string) => {
+        setCodeParams(prev => ({
+            ...prev,
+            [type]: value
+        }));
+    }, []);
     return (
         <div className={`${prefix}`}>
             <Spin spinning={loading} fullscreen></Spin>
@@ -122,15 +128,7 @@ function KnowledgeComponent({ id }: IProps) {
                 </div>
             </div>
             <TipTapComponent id={id} onChange={setCodeContent} content={article?.content}></TipTapComponent>
-            <InputCode codeParams={codeParams} onChange={(e, type) => {
-                setCodeParams((pre) => {
-                    return {
-                        ...pre,
-                        [type]: e
-                    }
-                })
-
-            }}></InputCode>
+            <InputCode codeParams={codeParams} onChange={handleCodeParamsChange}></InputCode>
         </div>
     )
 }
