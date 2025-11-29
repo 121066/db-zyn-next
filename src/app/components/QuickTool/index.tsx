@@ -189,7 +189,8 @@ const BoldButton = ({ editor, isTable = true }) => {
             <Dropdown menu={{
                 items: [{
                     label: <Space onClick={() => {
-                        editor.chain().focus().toggleHeading({ level: 1 }).run()
+                        // setHeading toggleHeading
+                        editor.chain().focus().setHeading({ level: 1 }).run()
                     }}> {'H1'}</Space>, key: 'left',
 
                 },
