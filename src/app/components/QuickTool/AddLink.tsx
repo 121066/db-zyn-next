@@ -26,7 +26,7 @@ const AddLink = (props: IProps) => {
     return (
         <Popover content={<>
             <div className=" space-y-2">
-                <Input placeholder="请输入链接地址" value={inputValue.url} onChange={(e) => {
+                <Input placeholder="请输入链接地址:https://" value={inputValue.url} onChange={(e) => {
                     setInputValue((pre) => {
                         return {
                             ...pre,
@@ -45,7 +45,7 @@ const AddLink = (props: IProps) => {
                 <Button type="primary" onClick={() => {
                     if (inputValue.url && inputValue.title) {
                         onChange(inputValue)
-                        // hide()
+                        hide()
                     }
                 }}>确定</Button>
             </div>

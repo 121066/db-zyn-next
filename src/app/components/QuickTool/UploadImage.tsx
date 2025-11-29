@@ -50,6 +50,7 @@ const UploadImage = (props: IProps) => {
             const isJpgOrPng = file.type === 'image/jpeg' || file.type === 'image/png';
             if (!isJpgOrPng) {
                 message.error('只能上传 JPG/PNG 文件！');
+                setLoading(false)
             }
             return isJpgOrPng;
         },
@@ -58,6 +59,7 @@ const UploadImage = (props: IProps) => {
         fileList,
     };
     const handlePaste = async (e) => {
+        setLoading(true)
         const items = e.clipboardData.items;
         // console.log(clipboardData, '复制粘贴的数据')
         // const items = clipboardData.items;
@@ -69,6 +71,11 @@ const UploadImage = (props: IProps) => {
                 const data = await recognizeText(file)
                 if (data && onChange) {
                     onChange(data)
+                    setLoading(false)
+                    message.success('识别成功');
+                } else {
+                    setLoading(false)
+                    message.error('识别失败');
                 }
             }
         }
@@ -91,10 +98,12 @@ const UploadImage = (props: IProps) => {
             </Button>,
         ]}>
         <div onPaste={handlePaste}>
-            <Spin spinning={loading} ></Spin>
-            <div className="mb-2 p-2 rounded-sm  border-sky-100 bg-slate-200" style={{ height: '100px' }}>
-                复制粘贴图片区域...
-            </div>
+            <Spin spinning={loading} >
+                <div className="mb-2 p-2 rounded-sm  border-sky-100 bg-slate-200" style={{ height: '100px' }}>
+                    {loading && <p>识别中...</p>}
+                    {!loading && <p>复制粘贴图片区域...</p>}
+                </div>
+            </Spin>
             <Upload.Dragger  {...propsItem} ref={uploadRef} >
                 <p className="ant-upload-drag-icon">
                     <UploadOutlined />

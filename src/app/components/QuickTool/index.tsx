@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Button, Tooltip, Dropdown, Space, Popover } from 'antd';
 import UploadImage from './UploadImage'; // 图片识别
 import AddLink from './AddLink';   // 插入链接
+import './index.scss'
 import {
     BoldOutlined, ItalicOutlined, StrikethroughOutlined,
     HighlightOutlined, AlignLeftOutlined, AlignCenterOutlined, AlignRightOutlined,
@@ -175,6 +176,14 @@ const BoldButton = ({ editor, isTable = true }) => {
             disabled: !editor.can().goToPreviousCell()
         }
     ] : [];
+    // 标准化URL
+    const normalizeUrl = (u: string) => {
+        try {
+            return u.includes(':') ? u : `https://${u}`
+        } catch {
+            return u
+        }
+    }
     return (
         <div className=' space-x-2 space-y-0'>
             <Dropdown menu={{
@@ -269,22 +278,41 @@ const BoldButton = ({ editor, isTable = true }) => {
             <Tooltip title="识别图片代码">
                 <Button icon={<PictureOutlined></PictureOutlined>}></Button>
             </Tooltip>
-            <Tooltip title="添加链接">
-                <AddLink onChange={(e) => {
-                    // editor.chain().focus().insertContent({
-                    //     type: 'link',
-                    //     attrs: {
-                    //         href: e.url,
-                    //         target: '_blank', // 可选：设置为在新标签页打开
-                    //     },
-                    // }).run();
-                    // editor.chain().focus().setLink({ href: e.url }).run();
-                    editor.chain().focus().extendMarkRange('link').setLink({ href: e.url })
+
+            <AddLink onChange={(e) => {
+                // editor.chain().focus().insertContent({
+                //     type: 'link',
+                //     attrs: {
+                //         href: e.url,
+                //         target: '_blank', // 可选：设置为在新标签页打开
+                //     },
+                // }).run();
+                // editor.chain().focus().setLink({ href: e.url }).run();
+                // editor.chain().focus().extendMarkRange('link').setLink({ href: e.url })
+                //     .run()
+                if (!editor) return
+                const url = normalizeUrl(e.url)
+                // 如果没有选中文本 -> 插入带 link 的文本
+                const { selection } = editor.state
+                if (selection.empty) {
+                    editor.chain().focus()
+                        .insertContent({
+                            type: 'text',
+                            text: e.title,
+
+                            marks: [{ type: 'link', attrs: { href: url, target: '_blank', style: 'color:#1677ff;', class: 'custom-link', } }],
+                        })
                         .run()
-                }}>
+                } else {
+                    // 有选中文本 -> 给选中文本加 link
+                    editor.chain().focus().extendMarkRange('link').setLink({ href: url, target: '_blank' }).run()
+                }
+            }}>
+                <Tooltip title="添加链接" trigger={'hover'}>
                     <Button icon={<DisconnectOutlined></DisconnectOutlined>}></Button>
-                </AddLink>
-            </Tooltip>
+                </Tooltip>
+            </AddLink>
+
             {isTable && <>
                 <Button onClick={() => editor.chain().focus().setTextAlign('justify').run()} className={editor.isActive({ textAlign: 'justify' }) ? 'is-active' : ''}>
                     Justify

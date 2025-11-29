@@ -146,11 +146,11 @@ function RenderPage(props: IProps) {
             {/* {
                 list.length <= 0 && <ItemList list={list}></ItemList>
             } */}
-            <div className="my-4">
+            <div className="my-4 text-center">
                 {page.isMore && !loading && <Button type="primary" onClick={() => {
                     getList(Number(page.pageNum) + 1)
                 }}>加载更多</Button>}
-                {!page.isMore && <div className=" text-center">没有更多了</div>}
+                {!page.isMore && <div className=" text-center border-t border-gray-200 text-gray-500 text-md ">~ 没有更多了~</div>}
             </div>
         </div>
     )

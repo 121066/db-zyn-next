@@ -14,6 +14,10 @@ pnpm dev
 bun dev
 ```
 
+# 访问
+
+http://localhost:3000/yn/db/blog
+
 # 解压
 
 unzip .next.zip -d /your/target/path
