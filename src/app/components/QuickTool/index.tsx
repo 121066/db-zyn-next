@@ -295,6 +295,13 @@ const BoldButton = ({ editor, isTable = true }) => {
                     onChange={async (e) => {
                         const file = e.target.files?.[0];
                         if (!file) return;
+                        // 文件大小限制 20M
+                        const maxSize = 20 * 1024 * 1024;
+                        if (file.size > maxSize) {
+                            window?.alert?.('文件大小不能超过20MB');
+                            e.target.value = '';
+                            return;
+                        }
                         try {
                             const res = await uploadFile(file);
                             if (res?.success && res?.data?.url) {

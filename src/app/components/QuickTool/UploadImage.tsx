@@ -83,6 +83,12 @@ const UploadImage = (props: IProps) => {
     };
     return <Modal title={title}
         open={modelVisible}
+        onCancel={() => {
+            setModelVisible(false)
+            if (onCancel) {
+                onCancel()
+            }
+        }}
         // onCancel={handleCancel}
         footer={[
             <Button key="cancel" onClick={() => {
