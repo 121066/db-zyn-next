@@ -3,6 +3,7 @@ import { Button, Tooltip, Dropdown, Space, Popover } from 'antd';
 import UploadImage from './UploadImage'; // 图片识别
 import AddLink from './AddLink';   // 插入链接
 import './index.scss'
+import { uploadFile } from '@/api';
 import {
     BoldOutlined, ItalicOutlined, StrikethroughOutlined,
     HighlightOutlined, AlignLeftOutlined, AlignCenterOutlined, AlignRightOutlined,
@@ -12,7 +13,8 @@ import {
     CodeOutlined,
     DesktopOutlined,
     PictureOutlined,
-    DisconnectOutlined
+    DisconnectOutlined,
+    FileZipOutlined
 
 } from '@ant-design/icons';
 export const tableHTML = `
@@ -282,10 +284,48 @@ const BoldButton = ({ editor, isTable = true }) => {
                     setModelVisible(true)
                 }}></Button>
             </Tooltip>
-            <Tooltip title="识别图片代码">
+            {/* <Tooltip title="识别图片代码">
                 <Button icon={<PictureOutlined></PictureOutlined>}></Button>
+            </Tooltip> */}
+            <Tooltip title="上传文件">
+                <input
+                    type="file"
+                    style={{ display: 'none' }}
+                    id="upload-file-input"
+                    onChange={async (e) => {
+                        const file = e.target.files?.[0];
+                        if (!file) return;
+                        try {
+                            const res = await uploadFile(file);
+                            if (res?.success && res?.data?.url) {
+                                // 处理文件名乱码
+                                const fileName = res?.data?.originalName || file.name;
+                                // 插入链接到富文本
+                                editor.chain().focus().insertContent({
+                                    type: 'text',
+                                    text: fileName,
+                                    marks: [{
+                                        type: 'link',
+                                        attrs: {
+                                            href: res.data.url,
+                                            target: '_blank',
+                                            style: 'color:#1677ff;',
+                                            class: 'custom-link',
+                                        }
+                                    }]
+                                }).run();
+                            }
+                        } catch (err) {
+                            // 错误处理
+                        }
+                        // 清空 input 以便重复上传同一个文件
+                        e.target.value = '';
+                    }}
+                />
+                <Button icon={<FileZipOutlined />} onClick={() => {
+                    document.getElementById('upload-file-input')?.click();
+                }}></Button>
             </Tooltip>
-
             <AddLink onChange={(e) => {
                 // editor.chain().focus().insertContent({
                 //     type: 'link',

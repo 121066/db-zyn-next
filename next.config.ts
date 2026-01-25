@@ -1,15 +1,23 @@
-import type { NextConfig } from "next";
+// import type { NextConfig } from "next";
 
-const nextConfig: NextConfig = {
-  /* config options here */
-  assetPrefix: '/yn/',
-  basePath: '/yn',
-  typescript: {
-    ignoreBuildErrors: true
-  },
-  images: {
-    domains: ['dbyxs.top'], // 添加允许的主机名
-  },
-};
+// const nextConfig: NextConfig = {
+//   /* config options here */
+//   assetPrefix: '/yn/',
+//   basePath: '/yn',
+//   typescript: {
+//     ignoreBuildErrors: true
+//   },
+//   images: {
+//     domains: ['dbyxs.top'], // 添加允许的主机名
+//   },
+//   async rewrites() {
+//     return [
+//       {
+//         source: '/api/:path*',
+//         destination: 'https://dbyxs.top/api/:path*',
+//       },
+//     ];
+//   },
+// };
 
-export default nextConfig;
+// export default nextConfig;

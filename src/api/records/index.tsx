@@ -1,4 +1,8 @@
+// const basePath = process.env.NEXT_PUBLIC_API_BASE_URL || 'https://dbyxs.top/api'
 const basePath = 'https://dbyxs.top/api'
+
+// console.log(process.env.NEXT_PUBLIC_BASE_PATH)
+// console.log(process.env.NEXT_PUBLIC_API_BASE_URL, '测试')
 /**
  * 获取记录列表
  */

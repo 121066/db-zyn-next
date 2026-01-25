@@ -16,3 +16,16 @@ export const uploadImage = async (params) => {
     const result = await response.json()
     return result
 }
+/**
+ * 文件上传
+ */
+export const uploadFile = async (params) => {
+    const formData = new FormData();
+    formData.append('file', params);
+    const response = await fetch(`${basePath}/api/oss/upload/doc`, {
+        method: 'post',
+        body: formData,
+    })
+    const result = await response.json()
+    return result
+}

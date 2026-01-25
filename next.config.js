@@ -12,6 +12,14 @@ const nextConfig = {
     images: {
         domains: ['dbyxs.top'], // 添加允许的主机名
     },
+    async rewrites() {
+        return [
+            {
+                source: '/api/:path*',
+                destination: 'https://dbyxs.top/api/:path*',
+            },
+        ];
+    },
 }
 
 module.exports = nextConfig 

@@ -71,6 +71,23 @@ export default function TipTapEditor({ id }: Props) {
                     if (data.urlPath) {
                         editor.commands.setImage({ src: data.urlPath });
                     }
+                } else {
+                    if (item && item.kind === 'file' && item.type.startsWith('application/x-zip-compressed')) {
+                        console.log(item, '非图片文件')
+                        // 非图片文件：调用 uploadFile
+                        // const { data } = await uploadFile(file);
+                        // if (data?.url && data?.originalName) {
+                        //     // 以链接形式插入富文本（格式：[文件名](文件URL)）
+                        //     editor.commands.insertContent({
+                        //         type: 'link',
+                        //         attrs: {
+                        //             href: data.url,
+                        //             target: '_blank' // 可选：新标签页打开
+                        //         },
+                        //         content: data.originalName // 链接显示的文字是原文件名
+                        //     });
+                        // }
+                    }
                 }
             }
         }
