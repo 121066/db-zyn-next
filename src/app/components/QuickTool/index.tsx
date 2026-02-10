@@ -296,9 +296,9 @@ const BoldButton = ({ editor, isTable = true }) => {
                         const file = e.target.files?.[0];
                         if (!file) return;
                         // 文件大小限制 20M
-                        const maxSize = 50 * 1024 * 1024;
+                        const maxSize = 150 * 1024 * 1024;
                         if (file.size > maxSize) {
-                            window?.alert?.('文件大小不能超过50MB');
+                            window?.alert?.('文件大小不能超过150MB');
                             e.target.value = '';
                             return;
                         }
