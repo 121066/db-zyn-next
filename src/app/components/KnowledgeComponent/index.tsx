@@ -32,6 +32,7 @@ function KnowledgeComponent({ id }: IProps) {
         if (data) {
             setArticle(data)
             setLoading(false)
+            setCodeContent(data.content || '')
             const { code_content, css_content, html_content } = data
             setCodeParams({
                 code_content,
@@ -40,6 +41,11 @@ function KnowledgeComponent({ id }: IProps) {
             })
         }
     }
+
+    const handleContentChange = React.useCallback((value: string) => {
+        setCodeContent(value)
+        setArticle((prev) => ({ ...(prev || {}), content: value } as Article))
+    }, [])
     useEffect(() => {
         if (id && idRef.current !== id) {
             idRef.current = id
@@ -135,7 +141,7 @@ function KnowledgeComponent({ id }: IProps) {
                     }}>返回</Button>
                 </div>
             </div>
-            <TipTapComponent id={id} onChange={setCodeContent} content={article?.content}></TipTapComponent>
+            <TipTapComponent id={id} onChange={handleContentChange} content={codeContent}></TipTapComponent>
             <InputCode codeParams={codeParams} onChange={handleCodeParamsChange}></InputCode>
         </div>
     )
