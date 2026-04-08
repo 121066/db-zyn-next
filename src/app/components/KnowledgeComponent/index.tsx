@@ -19,7 +19,7 @@ function KnowledgeComponent({ id }: IProps) {
     const [loading, setLoading] = useState(true)
     const idRef = useRef(null)
     const router = useRouter()
-    const [article, setArticle] = useState<Article>() // 文章详情
+    const [article, setArticle] = useState<Article>(() => ({ is_show: 1 } as Article)) // 文章详情，默认展示
     const [codeParams, setCodeParams] = useState({ // 代码内容
         code_content: '',
         css_content: '',
@@ -84,6 +84,7 @@ function KnowledgeComponent({ id }: IProps) {
                 ...codeParams,
                 uuid: await getFingerprint(),
                 type: article?.article_type,
+                is_show: article?.is_show ?? 1,
                 // avatar: 'https://dbyxs.top/file/a7228d1175b415bfe21e37a83234f025',
                 creator_name: '小楠',
                 creator_id: 1
@@ -126,7 +127,7 @@ function KnowledgeComponent({ id }: IProps) {
                     })
                 }} value={article?.article_type} style={{ minWidth: '240px' }}></Select></div>
                 <div className=" flex flex-row justify-start items-center space-x-3 ml-4">
-                    <Switch checkedChildren="展示" unCheckedChildren="不展示" checked={!!article?.is_show} onChange={(e) => {
+                    <Switch checkedChildren="展示" unCheckedChildren="不展示" checked={article?.is_show !== undefined ? !!article.is_show : true} onChange={(e) => {
                         setArticle((pre) => {
                             return {
                                 ...pre,
