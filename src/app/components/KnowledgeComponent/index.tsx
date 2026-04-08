@@ -3,7 +3,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import TipTapComponent from "../TipTapComponent";
 import "./index.scss"
-import { Input, Select, Button, Spin, message } from "antd";
+import { Input, Select, Button, Spin, message, Switch } from "antd";
 import InputCode from "../InputCode";
 import { useRouter } from "next/navigation";
 import useArticles from "@/hooks/useArticles";
@@ -120,6 +120,14 @@ function KnowledgeComponent({ id }: IProps) {
                     })
                 }} value={article?.article_type} style={{ minWidth: '240px' }}></Select></div>
                 <div className=" flex flex-row justify-start items-center space-x-3 ml-4">
+                    <Switch checkedChildren="展示" unCheckedChildren="不展示" checked={!!article?.is_show} onChange={(e) => {
+                        setArticle((pre) => {
+                            return {
+                                ...pre,
+                                is_show: e ? 1 : 0
+                            }
+                        })
+                    }} />
                     <Button type='primary' onClick={saveArticle}>保存</Button>
                     <Button type='primary' onClick={() => {
                         // router.push('/db/newblog')

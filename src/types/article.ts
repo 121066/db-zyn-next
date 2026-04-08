@@ -47,4 +47,5 @@ export interface Article {
     like_status?: 'not_liked' | 'liked';
     // 文章的评论状态，使用枚举类型，有'not_commented'（未评论）和'commented'（已评论）两种可能的值
     cover_photo?: string// 封面图片
+    is_show?: string | number // 是否展示 0不展示 1展示
 }
